@@ -1,0 +1,72 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+    .role-body {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        .edit-body {
+            width: 100%;
+        }
+        .role-panel {
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-start;
+            .row-input {
+                width: 30%;
+            }
+            .row-name {
+                align-items: flex-start;
+            }
+            .auth-choose {
+                height: 100%;
+                padding: 10px 0;
+            }
+            .row-list-panel {
+                width: calc(100% - 8rem);
+                display: inline-flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                flex-direction: column;
+                .row-item {
+                    width: calc(100% - 3rem);
+                    display: inline-flex;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                }
+                .row-name {
+                    width: 12rem;
+                    align-items: center;
+                }
+                .row-list-box {
+                    width: calc(100% - 12rem);
+                    .row-checkbox {
+                        width: 10rem;
+                        margin-left: 1rem;
+                        margin-bottom: 1rem;
+                        display: inline-flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                    }
+                }
+            }
+            .check-box {
+                margin-left: 5px;
+            }
+        }
+    }
+
+    .footer-box {
+        .sure {
+            margin-right: 2rem;
+        }
+    }
+
+    input[type="checkbox"]:checked:after {
+        color: white;
+        background: #36f url(../../../../assets/images/selCheck.svg) no-repeat right;
+    }
+}
+
+

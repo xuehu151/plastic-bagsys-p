@@ -1,0 +1,39 @@
+<div class="customAuthLoginContent" #loginDiv>
+    <div class="title">
+        <!--<img src="./././././assets/images/login-logo.png">-->
+        <span>
+            {{configInfo['title']}}
+        </span>
+    </div>
+    <div class="login-body">
+        <div class="login-main">
+            <h3>用户登录</h3>
+            <div class="item-box">
+                <div class="input-group">
+                    <span><i class="user-name"></i></span>
+                    <input type="text"
+                           name="username"
+                           class="form-control"
+                           [(ngModel)]="username"
+                           (keydown.enter)="onEnter()"
+                           placeholder="用户名">
+                </div>
+                <div class="input-group">
+                    <span><i class="user-pass"></i></span>
+                    <input type="password"
+                           name="password"
+                           class="form-control"
+                           [(ngModel)]="password"
+                           (keydown.enter)="onEnter()"
+                           placeholder="密码">
+                </div>
+                <span>{{errInfo}}</span>
+                <div class="login-btn-panel">
+                    <button class="login-btn" [disabled]="!password || !username" (click)="loginSubmit()">
+                        登录
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

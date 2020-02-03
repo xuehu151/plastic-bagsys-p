@@ -1,0 +1,85 @@
+.table-panel {
+    line-height: 1.5em;
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: table;
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+    word-break: normal;
+    word-break: keep-all;
+    background: white;
+}
+
+.table {
+    border: 1px solid #edf1f7;
+}
+
+.table-head {
+    border: 0;
+    th {
+        border-top: 0;
+        border-bottom: 0;
+        border-right: 1px solid #edf1f7;
+        .table-title {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            cursor: pointer;
+        }
+        .icon {
+            width: 100%;
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+    }
+    th:last-child {
+        border-right: 0;
+    }
+    .inputClass {
+        width: 1rem;
+    }
+}
+
+.table-body {
+    border: 0;
+    tr:nth-child(even) {
+        background: #f7f9fc;
+    }
+    td {
+        border-top: 1px solid #edf1f7;
+        border-bottom: 1px solid #edf1f7;
+        border-right: 1px solid #edf1f7;
+    }
+    td:last-child {
+        border-bottom: 0;
+    }
+    .operator{
+        width: 8rem;
+        span{
+            padding: 1px 8px;
+            color: white;
+            cursor: pointer;
+            font-size: .8rem;
+            text-align: center;
+            display: inline-block;
+            border-radius: 2px;
+        }
+        span:first-child{
+            background-color: #67c23a;
+            border-color: #67c23a;
+        }
+        span:last-child{
+            background-color: #f56c6c;
+            border-color: #f56c6c;
+            margin-left: 2px;
+        }
+    }
+}
+
+input[type="checkbox"]:checked:after {
+    color: white;
+    background: #36f url(../../../../assets/images/selCheck.svg) no-repeat right;
+}

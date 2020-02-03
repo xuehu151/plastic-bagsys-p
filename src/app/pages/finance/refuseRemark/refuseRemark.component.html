@@ -1,0 +1,23 @@
+<nb-card>
+    <nb-card-header>
+        <div>填写拒绝理由</div>
+    </nb-card-header>
+
+    <nb-card-body>
+        <div class="edit-body">
+            <div class="row">
+                <textarea
+                    class="remark"
+                    [(ngModel)]="refuseRemark"
+                    placeholder="填写拒绝理由" ></textarea>
+            </div>
+        </div>
+    </nb-card-body>
+
+    <nb-card-footer>
+        <div class="footer-box">
+            <button class="sure" (click)="sure()">确定</button>
+            <button class="cancel" (click)="cancel()">取消</button>
+        </div>
+    </nb-card-footer>
+</nb-card>

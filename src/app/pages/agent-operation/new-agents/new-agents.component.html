@@ -1,0 +1,89 @@
+<nb-card>
+    <nb-card-header>
+        <div>新增代理商</div>
+    </nb-card-header>
+
+    <nb-card-body>
+        <div class="edit-body">
+            <div class="row">
+                <span class="row-name">代理商姓名 <i>*</i></span>
+                <div class="row-input">
+                    <input type="text" [(ngModel)]="name" placeholder="输入代理商姓名">
+                </div>
+            </div>
+            <div class="row">
+                <span class="row-name">代理商手机号 <i>*</i></span>
+                <div class="row-input">
+                    <input type="text" [(ngModel)]="phone" placeholder="输入代理商手机号">
+                </div>
+            </div>
+            <div class="row">
+                <span class="row-name">代理商公司名</span>
+                <div class="row-input">
+                    <input type="text" [(ngModel)]="compName" placeholder="输入代理商公司名">
+                </div>
+            </div>
+            <div class="row">
+                <span class="row-name">管理员手机号</span>
+                <div class="row-input">
+                    <input type="text" [(ngModel)]="managerPhone" placeholder="输入管理员手机号">
+                </div>
+            </div>
+            <div class="row">
+                <span class="row-name">代理商级别</span>
+                <div class="row-input">
+                    <select class="form-control" [(ngModel)]="agentLevel">
+                        <option value="" disabled>-请选择级别-</option>
+                        <option value="1">一级</option>
+                        <option value="2">二级</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <span class="row-name area-name">供应商城市 <i>*</i></span>
+                <div class="row-input agent">
+                    <div class="area-list">
+                        <select class="form-control select-width"
+                                (change)="changeProvice($event)">
+                            <option value="" disabled>-请选择省份-</option>
+                            <option *ngFor="let pro of proviceData;let i=index"  [value]='pro.id' >
+                                {{pro.name}}
+                            </option>
+                        </select>
+                        <select class="form-control select-width"
+                                (change)="changeCity($event)">
+                            <option value="" disabled>-请选择城市-</option>
+                            <option *ngFor="let city of cityData; let i=index"  [value]='city.id' >
+                                {{city.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="area-box" *ngIf="areaInfo.length">
+                        <ul>
+                            <li *ngFor="let area of areaInfo;let i=index;">
+                                <span>{{i+1}}、{{area.provinceName}}{{area.cityName}}</span>
+                                <i class="nb-close" (click)="deleteArea(i)"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="add-icon">
+                    <i class="nb-plus" (click)="addAreaInfo()"></i>
+                </div>
+            </div>
+            <div class="row">
+                <span class="row-name">代理商密码</span>
+                <div class="row-input">
+                    <input type="password" placeholder="输入密码" [(ngModel)]="agentPassword">
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+
+    <nb-card-footer>
+        <div class="footer-box">
+            <button class="sure" (click)="isSure()">确定</button>
+            <button class="cancel" (click)="cancel()">取消</button>
+        </div>
+    </nb-card-footer>
+</nb-card>

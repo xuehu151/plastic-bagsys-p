@@ -1,0 +1,42 @@
+<nb-card>
+    <nb-card-header>
+        <div class="header-title">
+            <div class="header-input">
+                <div class="edit-body">
+                    <div class="row">
+                        <div class="input-panel">
+                            <span class="row-name">代理商姓名</span>
+                            <div class="row-input">
+                                <input type="text" [(ngModel)]="agentName" placeholder="输入代理商姓名">
+                            </div>
+                        </div>
+                        <div class="input-panel">
+                            <span class="row-name">代理商手机号</span>
+                            <div class="row-input">
+                                <input type="text" [(ngModel)]="agentTelephone" placeholder="输入代理商手机号">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-btn">
+                <button class="search" (click)="searchPayList()">搜索</button>
+                <button class="add" (click)="exportExcel()">导出</button>
+            </div>
+        </div>
+    </nb-card-header>
+</nb-card>
+
+<nb-card>
+    <nb-card-body>
+        <ng-table
+            [tableTitle] = tableTitle
+            [tableList] = tableList
+            [signatureIdArr]="signatureIdArr"
+            (editItem) = "refusePayMoney($event)"
+            (operateItem) = "editRefusePay($event)"
+            (selectAllData)="selectAllPayData($event)"
+            (selectOneData)="selectPayOneData($event)"
+            (sortEvent)="sortPayList($event)"></ng-table>
+    </nb-card-body>
+</nb-card>

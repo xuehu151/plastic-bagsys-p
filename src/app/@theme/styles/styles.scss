@@ -1,0 +1,78 @@
+// themes - our custom or/and out of the box themes
+@import 'themes';
+
+// framework component themes (styles tied to theme variables)
+@import '~@nebular/theme/styles/globals';
+@import '~@nebular/auth/styles/all';
+@import '~@nebular/bootstrap/styles/globals';
+// ...
+
+// global app font size
+@import './font-size';
+
+// loading progress bar theme
+@import './pace.theme';
+
+// install the framework and custom global styles
+@include nb-install() {
+
+  // framework global styles
+  @include nb-theme-global();
+  @include nb-auth-global();
+  @include nb-bootstrap-global();
+
+  // loading progress bar
+  @include ngx-pace-theme();
+};
+
+.nb-theme-default nb-toast.success{
+    background: #40dc7e!important;
+    color: white;
+    font-size: 1.2rem;
+    opacity: 1;
+}
+
+.nb-theme-default nb-toast.danger {
+    background: #ff4c6a!important;
+    color: white;
+    font-size: 1.2rem;
+    opacity: 1;
+}
+
+[dir=ltr] .nb-theme-default nb-toast .icon{
+    margin-right: 2px;
+}
+.content-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nb-theme-default nb-sidebar.menu-sidebar{
+    margin-top: 0!important;
+}
+
+.nb-theme-default nb-menu .menu-items > .menu-item:first-child {
+     border-top: 0;
+}
+
+.nb-theme-default nb-sidebar.menu-sidebar nb-menu > .menu-items > .menu-item:first-child .menu-title::after {
+    content: ''!important;
+    padding: 0!important;
+}
+
+.nb-theme-default nb-layout .layout .layout-container .content .columns nb-layout-column {
+    padding: 1.25rem 2.25rem 0.75rem;
+}
+
+.nb-theme-default nb-menu .menu-item .menu-icon{
+    font-size: 2rem;
+}
+
+select.form-control:not([size]):not([multiple]) {
+    height: calc(2rem + 7px)!important;
+}
+
+.nb-theme-default .cdk-overlay-container {
+    z-index: 1060;
+}

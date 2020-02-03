@@ -1,0 +1,105 @@
+<nb-card>
+    <nb-card-header>
+        正在建立一个新的角色...
+    </nb-card-header>
+
+    <nb-card-body>
+        <div class="role-body">
+            <div class="edit-body">
+                <div class="row">
+                    <div class="role-panel">
+                        <span class="row-name">角色名</span>
+                        <div class="row-input">
+                            <input type="text"
+                                   [(ngModel)]="roleName"
+                                   placeholder="输入角色名">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="role-panel">
+                        <span class="row-name auth-choose">权限选择</span>
+                        <div class="row-list-panel">
+                            <div class="row row-item">
+                                <div class="row-name">
+                                    权限管理
+                                    <input type="checkbox" [(ngModel)]="auth" class="check-box">
+                                </div>
+                                <div class="row-list-box">
+                                    <div class="row-checkbox">
+                                        角色 <input type="checkbox" class="check-box">
+                                    </div>
+                                    <div class="row-checkbox">
+                                        用户 <input type="checkbox"  class="check-box">
+                                    </div>
+                                    <div class="row-checkbox">
+                                        角色新增 <input type="checkbox"  class="check-box">
+                                    </div>
+                                    <div class="row-checkbox">
+                                        用户新增 <input type="checkbox"  class="check-box">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-item">
+                                <div class="row-name">
+                                    财务管理 <input type="checkbox"  class="check-box">
+                                </div>
+                                <div class="row-list-box">
+                                    <div class="row-checkbox">
+                                        打款 <input type="checkbox"  class="check-box">
+                                    </div>
+                                    <div class="row-checkbox">
+                                        打款历史 <input type="checkbox"  class="check-box">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-item">
+                                <div class="row-name">
+                                    运营管理 <input type="checkbox"  class="check-box">
+                                </div>
+                                <div class="row-list-box">
+                                    <div class="row-checkbox">
+                                        代理商管理 <input type="checkbox"  class="check-box">
+                                    </div>
+                                    <div class="row-checkbox">
+                                        设备管理 <input type="checkbox"  class="check-box">
+                                    </div>
+                                    <div class="row-checkbox">
+                                        C端用户管理 <input type="checkbox"  class="check-box">
+                                    </div>
+                                    <div class="row-checkbox">
+                                        订单 <input type="checkbox"  class="check-box">
+                                    </div>
+                                    <div class="row-checkbox">
+                                        新增代理商 <input type="checkbox"  class="check-box">
+                                    </div>
+                                    <div class="row-checkbox">
+                                        新增设备 <input type="checkbox"  class="check-box">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-item">
+                                <div class="row-name">
+                                    采购订单管理 <input type="checkbox"  class="check-box">
+                                </div>
+                                <div class="row-list-box">
+                                    <div class="row-checkbox">
+                                        订单信息 <input type="checkbox"  class="check-box">
+                                    </div>
+                                    <div class="row-checkbox">
+                                        订单历史 <input type="checkbox"  class="check-box">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="footer-box">
+            <button class="sure" (click)="addRole()">新增</button>
+        </div>
+    </nb-card-footer>
+</nb-card>

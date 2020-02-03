@@ -1,0 +1,43 @@
+<nb-card>
+    <nb-card-header>
+        <div>新增用户</div>
+    </nb-card-header>
+
+    <nb-card-body>
+        <div class="edit-body">
+            <div class="row">
+                <span class="row-name">姓名</span>
+                <div class="row-input">
+                    <input type="text" [(ngModel)]="username" placeholder="输入姓名">
+                </div>
+            </div>
+            <div class="row">
+                <span class="row-name">手机号</span>
+                <div class="row-input">
+                    <input type="text" [(ngModel)]="userTelephone" placeholder="输入手机号">
+                </div>
+            </div>
+            <div class="row">
+                <span class="row-name">角色</span>
+                <div class="row-input">
+                    <div class="form-group">
+                        <select class="form-control" [(ngModel)]="userRole">
+                            <option value="" disabled>-请选择角色-</option>
+                            <option *ngFor="let role of roleList">
+                                {{role.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+
+    <nb-card-footer>
+        <div class="footer-box">
+            <span>P端登录密码默认手机号后6位</span>
+            <button class="sure" (click)="sure()">确定</button>
+            <button class="cancel" (click)="cancel()">取消</button>
+        </div>
+    </nb-card-footer>
+</nb-card>

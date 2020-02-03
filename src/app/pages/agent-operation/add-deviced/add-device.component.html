@@ -1,0 +1,121 @@
+<nb-card>
+    <nb-card-header>
+        <div>新增设备</div>
+    </nb-card-header>
+
+    <nb-card-body>
+        <div class="edit-body">
+            <div class="row list-row">
+                <div class="input-panel">
+                    <span class="row-name">设备名称 <i>*</i></span>
+                    <div class="row-input">
+                        <div class="editable" >
+                            <input type="text"
+                                   [(ngModel)]="deviceName"
+                                   placeholder="输入代设备名称"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-panel">
+                    <span class="row-name">设备编号 <i>*</i></span>
+                    <div class="row-input">
+                        <div class="editable" >
+                            <input type="text"
+                                   [(ngModel)]="deviceCode"
+                                   placeholder="输入代设备编号"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row list-row">
+                <div class="input-panel">
+                    <span class="row-name">持有人手机号 <i>*</i></span>
+                    <div class="row-input">
+                        <input type="text"
+                               style="width: calc(100% - 4rem)"
+                               [(ngModel)]="phone"
+                               placeholder="输入持有人手机号">
+                        <button class="query-btn" (click)="queryPhone()">
+                            查询
+                        </button>
+                    </div>
+                </div>
+                <div class="input-panel">
+                    <span class="row-name">持有人姓名 <i>*</i></span>
+                    <div class="row-input">
+                        <input type="text" readonly [(ngModel)]="holderName" placeholder="输入持有人姓名">
+                    </div>
+                </div>
+            </div>
+            <div class="row list-row">
+                <div class="input-panel">
+                    <span class="row-name">选择商品 <i>*</i></span>
+                    <div class="row-input">
+                        <select class="form-control" [(ngModel)]="goodsId" (change)="changeGoods($event)">
+                            <option value="0" disabled>-请选择商品-</option>
+                            <option *ngFor="let goods of goodsList;let i=index;" [value]="goods.id">
+                                {{goods.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-panel">
+                    <span class="row-name">袋子售价<i>*</i></span>
+                    <div class="row-input">
+                        <input type="text" readonly [(ngModel)]="price" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="row list-row">
+                <div class="input-panel">
+                    <span class="row-name">袋子成本<i>*</i></span>
+                    <div class="row-input">
+                        <input type="text" readonly [(ngModel)]="cost" placeholder="">
+                    </div>
+                </div>
+                <div class="input-panel">
+                    <span class="row-name">分润比例<i>*</i></span>
+                    <div class="row-input">
+                        <input type="text" [(ngModel)]="profitPercent" placeholder="输入分润比例">
+                    </div>
+                </div>
+            </div>
+            <div class="row list-row">
+                <div class="input-panel">
+                    <span class="row-name">发袋地点</span>
+                    <div class="row-input">
+                        <input type="text" [(ngModel)]="address" placeholder="输入发袋地点">
+                    </div>
+                </div>
+                <div class="input-panel">
+                    <span class="row-name area-name">发袋城市</span>
+                    <div class="row-input agent">
+                        <div class="area-list">
+                            <select class="form-control select-width"
+                                    (change)="changeProvice($event)">
+                                <option value="" disabled>-请选择省-</option>
+                                <option *ngFor="let pro of proviceData;let i=index"  [value]='pro.id' >
+                                    {{pro.name}}
+                                </option>
+                            </select>
+                            <select class="form-control select-width"
+                                    [(ngModel)]="cityId">
+                                <option value="0" disabled>-请选择市-</option>
+                                <option *ngFor="let city of cityData; let i=index"  [value]='city.id' >
+                                    {{city.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+
+    <nb-card-footer>
+        <div class="footer-box">
+            <button class="sure" (click)="isSure()">确定</button>
+            <button class="cancel" (click)="cancel()">取消</button>
+        </div>
+    </nb-card-footer>
+</nb-card>

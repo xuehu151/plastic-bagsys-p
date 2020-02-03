@@ -1,0 +1,67 @@
+<nb-card>
+    <nb-card-header>
+        <div class="header-title">
+            <div class="header-input">
+                <div class="edit-body">
+                    <div class="row">
+                        <div class="input-panel">
+                            <span class="row-name">用户姓名</span>
+                            <div class="row-input">
+                                <input type="text" [(ngModel)]="username" placeholder="输入用户姓名">
+                            </div>
+                        </div>
+                        <div class="input-panel">
+                            <span class="row-name">用户手机号</span>
+                            <div class="row-input">
+                                <input type="text" [(ngModel)]="userTelephone" placeholder="输入用户手机号">
+                            </div>
+                        </div>
+                        <div class="input-panel">
+                            <span class="row-name">当前角色</span>
+                            <div class="row-input">
+                                <div class="form-group">
+                                    <select class="form-control" [(ngModel)]="userRole">
+                                        <option value="" disabled>-请选择角色-</option>
+                                        <option *ngFor="let role of roleList">
+                                            {{role.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   <!-- <div class="row">
+                        <div class="input-panel">
+                            <span class="row-name">创建时间</span>
+                            <div class="row-input">
+                                <input nbInput
+                                       type="text"
+                                       readonly
+                                       placeholder="输入时间"
+                                       #datepicker
+                                       (change)="changeTime()"
+                                       [nbDatepicker]="formpicker">
+                                <nb-datepicker #formpicker></nb-datepicker>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+            <div class="header-btn">
+                <button class="search" (click)="searchUser()">搜索</button>
+                <button class="add" (click)="addUser()">新增</button>
+            </div>
+        </div>
+    </nb-card-header>
+</nb-card>
+
+<nb-card>
+    <nb-card-body>
+        <ng-table
+            [tableTitle] = tableTitle
+            [tableList] = tableList
+            [signatureIdArr]="signatureIdArr"
+            (editItem) = "editItem($event)"
+            (operateItem) = "deleteItem($event)"></ng-table>
+    </nb-card-body>
+</nb-card>

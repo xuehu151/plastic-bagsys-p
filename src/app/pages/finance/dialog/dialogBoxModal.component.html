@@ -1,0 +1,19 @@
+<nb-card>
+    <nb-card-header>
+        <div>提示信息</div>
+    </nb-card-header>
+
+    <nb-card-body>
+        <div class="dialog-box">
+            <img src="./././././assets/images/dialogBlue.svg">
+            <span>{{text}}</span>
+        </div>
+    </nb-card-body>
+
+    <nb-card-footer>
+        <div class="footer-box">
+            <button class="sure" (click)="closeModal('ok')">确定</button>
+            <button class="cancel" (click)="closeModal('')">取消</button>
+        </div>
+    </nb-card-footer>
+</nb-card>

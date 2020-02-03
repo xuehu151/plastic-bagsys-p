@@ -1,0 +1,51 @@
+@import '../../../../@theme/styles/themes';
+
+@include nb-install-component() {
+    img {
+        width: 2.4rem;
+        height: 2.4rem;
+    }
+    .modal-header {
+        background: #001b4c !important;
+    }
+    .modal-body {
+        text-align: center;
+        background: #001b4c !important;
+        img {
+            margin: auto;
+            margin-bottom: 1rem;
+        }
+    }
+    .modal-title {
+        font-size: 1.4rem;
+        color: #a3f0ff;
+    }
+    .modal-footer {
+        background: #001b4c !important;
+        text-align: center;
+    }
+    p {
+        width: 100%;
+        font-size: 1.6rem;
+        color: #ffffff;
+        font-weight: normal;
+        text-align: center;
+    }
+    .buttonCol {
+        width: 100%;
+        button {
+            width: 40%;
+            height: 4.4rem;
+            font-size: 1.4rem;
+            color: #ffffff;
+            border-radius: 3px;
+            background: #003dac;
+            border: 0;
+        }
+        button:last-child {
+            background: transparent !important;
+            border: 1px solid #003dac;
+            margin-left: 10%;
+        }
+    }
+}

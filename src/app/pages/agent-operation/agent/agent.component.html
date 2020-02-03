@@ -1,0 +1,111 @@
+<nb-card>
+    <nb-card-header>
+        <div class="header-title">
+            <div class="header-input">
+                <div class="edit-body">
+                    <div class="row">
+                        <div class="input-panel">
+                            <span class="row-name">代理商姓名</span>
+                            <div class="row-input">
+                                <input type="text" [(ngModel)]="agentName" placeholder="输入代理商姓名">
+                            </div>
+                        </div>
+                        <div class="input-panel">
+                            <span class="row-name">代理商手机号</span>
+                            <div class="row-input">
+                                <input type="text" [(ngModel)]="agentTelephone" placeholder="输入代理商手机号">
+                            </div>
+                        </div>
+                        <div class="input-panel">
+                            <span class="row-name">代理商公司名</span>
+                            <div class="row-input">
+                                <input type="text" [(ngModel)]="agentCompanyName" placeholder="输入代理商公司名">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-panel">
+                            <span class="row-name">选择省市区</span>
+                            <div class="row-input">
+                                <select class="form-control select-width" (change)="changeProvice($event)" >
+                                    <option value="" disabled>选择省</option>
+                                    <option *ngFor="let pro of proviceData;let i=index"  [value]='pro.id' >
+                                        {{pro.name}}
+                                    </option>
+                                </select>
+                                <select class="form-control select-width" [(ngModel)]="cityId">
+                                    <option value="" disabled>选择市</option>
+                                    <option *ngFor="let city of cityData; let i=index"  [value]='city.id' >
+                                        {{city.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-panel">
+                            <span class="row-name">管理员手机号</span>
+                            <div class="row-input">
+                                <input type="text" [(ngModel)]="managerPhone " placeholder="代理商手机号">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-btn">
+                <button class="search" (click)="searchAgentList()">搜索</button>
+                <button class="export" (click)="exportAgentExcel()">导出</button>
+                <button class="add" (click)="addAgent()">新增</button>
+            </div>
+        </div>
+    </nb-card-header>
+</nb-card>
+
+<nb-card>
+    <nb-card-body>
+        <div class="table-panel">
+            <table class="table">
+                <thead class="table-head">
+                <tr>
+                    <th *ngFor="let list of tableTitle let i = index;"
+                        [hidden]="!list.isShowInput"
+                        [ngClass]="{inputClass: list.isSelect}">
+                        <div class="">
+                            <input type="checkbox"
+                                   id="all"
+                                   *ngIf="list.isSelect"
+                                   [checked]=list.isChecked
+                                   (change)="selectAll($event)">
+                        </div>
+                        <div class="table-title">
+                            <span>{{list.title}}</span>
+                            <span class="icon"
+                                  *ngIf="list.sortIcon"
+                                  (click)="clickSort()">
+                                    <i class="nb-chevron-up"></i>
+                                    <i class="nb-chevron-down"></i>
+                                </span>
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="table-body">
+                    <tr *ngFor="let item of tableList; let i = index;"
+                        [ngClass]="{inputClass: item.isSelect}">
+                        <td class="role-name">{{item.agentId}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>{{item.compName}}</td>
+                        <td>{{item.level | levelAgent}}</td>
+                        <td>{{item.managerPhone}}</td>
+                        <td>{{item.areaGroup || '未知'}}</td>
+                        <td>{{item.deviceCount|| 0}}</td>
+                        <td  class="operator" *ngIf="item.isOperation">
+                            <span (click)="startEditAgent(item)">
+                                {{item.editButtonText}}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </nb-card-body>
+</nb-card>

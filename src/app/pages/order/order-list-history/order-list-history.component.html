@@ -1,0 +1,129 @@
+<nb-card>
+    <nb-card-header>
+        <div class="header-title">
+            <div class="header-input">
+                <div class="edit-body">
+                    <div class="row">
+                        <div class="input-panel">
+                            <span class="row-name">收货人姓名</span>
+                            <div class="row-input">
+                                <input type="text" [(ngModel)]="consignee" placeholder="输入姓名">
+                            </div>
+                        </div>
+                        <div class="input-panel">
+                            <span class="row-name">收货人手机号</span>
+                            <div class="row-input">
+                                <input type="text" [(ngModel)]="signeeMobile" placeholder="输入手机号">
+                            </div>
+                        </div>
+                        <div class="input-panel">
+                            <span class="row-name">操作人姓名</span>
+                            <div class="row-input">
+                                <input type="text" [(ngModel)]="operatorName" placeholder="输入姓名">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-panel">
+                            <span class="row-name">运单号</span>
+                            <div class="row-input">
+                                <input type="text" [(ngModel)]="trackNum" placeholder="输入运单号">
+                            </div>
+                        </div>
+                        <div class="input-panel">
+                            <span class="row-name">订单状态</span>
+                            <div class="row-input">
+                                <select  [(ngModel)]="status">
+                                    <option value="0" disabled>请选择</option>
+                                    <option value="1">待支付</option>
+                                    <option value="2">已支付</option>
+                                    <option value="3">已发货</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-panel">
+                            <span class="row-name">选择物品</span>
+                            <div class="row-input">
+                                <select  [(ngModel)]="choiceGoods">
+                                    <option value="0" disabled>请选择</option>
+                                    <option *ngFor="let goods of goodsList">
+                                        {{goods.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-panel">
+                            <span class="row-name">申请日期</span>
+                            <div class="row-input">
+                                <input type="text" [(ngModel)]="applyDate" placeholder="输入申请日期">
+                            </div>
+                        </div>
+                        <div class="input-panel">
+                            <span class="row-name">发货日期</span>
+                            <div class="row-input">
+                                <input type="text" [(ngModel)]="issuanceDate" placeholder="输入发货日期">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-btn">
+                <button class="search" (click)="searchOrderHistoryList()">搜索</button>
+                <button class="export" (click)="exportOrderHistoryExcel()">导出</button>
+            </div>
+        </div>
+    </nb-card-header>
+</nb-card>
+
+<nb-card>
+    <nb-card-body>
+        <div class="table-panel">
+            <table class="table">
+                <thead class="table-head">
+                <tr>
+                    <th *ngFor="let list of tableTitle let i = index;"
+                        [hidden]="!list.isShowInput"
+                        [ngClass]="{inputClass: list.isSelect}">
+                        <div class="">
+                            <input type="checkbox"
+                                   id="all"
+                                   *ngIf="list.isSelect"
+                                   [checked]=list.isChecked
+                                   (change)="selectAll($event)">
+                        </div>
+                        <div class="table-title">
+                            <span>{{list.title}}</span>
+                            <span class="icon"
+                                  *ngIf="list.sortIcon"
+                                  (click)="clickSort()">
+                                    <i class="nb-chevron-up"></i>
+                                    <i class="nb-chevron-down"></i>
+                                </span>
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="table-body">
+                <tr *ngFor="let item of tableList; let i = index;"
+                    [ngClass]="{inputClass: item.isSelect}">
+                    <td class="role-name">{{i+1}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.phone}}</td>
+                    <td>{{item.compName}}</td>
+                    <td>{{item.level | levelAgent}}</td>
+                    <td>{{item.managerPhone}}</td>
+                    <td>{{item.areaGroup || '未知'}}</td>
+                    <td>{{item.deviceCount|| 0}}</td>
+                    <td  class="operator" *ngIf="item.isOperation">
+                        <span (click)="fillBillNumber(item)">
+                            {{item.editButtonText}}
+                        </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </nb-card-body>
+</nb-card>

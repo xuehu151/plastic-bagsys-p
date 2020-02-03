@@ -1,0 +1,73 @@
+<nb-card>
+    <nb-card-header>
+        <div class="header-title">
+            <div class="header-input">
+                <div class="edit-body">
+                    <div class="row">
+                        <div class="input-panel">
+                            <span class="row-name">用户ID</span>
+                            <div class="row-input">
+                                <input type="text" [(ngModel)]="memNum" placeholder="输入编号">
+                            </div>
+                        </div>
+                        <div class="input-panel">
+                            <span class="row-name">微信昵称</span>
+                            <div class="row-input">
+                                <input type="text" [(ngModel)]="nickname" placeholder="输入昵称">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-btn">
+                <button class="search" (click)="searchCUserList()">搜索</button>
+                <button class="export" (click)="exportCUserExcel()">导出</button>
+            </div>
+        </div>
+    </nb-card-header>
+</nb-card>
+
+<nb-card>
+    <nb-card-body>
+        <div class="table-panel">
+            <table class="table">
+                <thead class="table-head">
+                <tr>
+                    <th *ngFor="let list of tableTitle let i = index;"
+                        [hidden]="!list.isShowInput"
+                        [ngClass]="{inputClass: list.isSelect}">
+                        <div class="">
+                            <input type="checkbox"
+                                   id="all"
+                                   *ngIf="list.isSelect"
+                                   [checked]=list.isChecked
+                                   (change)="selectAll($event)">
+                        </div>
+                        <div class="table-title">
+                            <span>{{list.title}}</span>
+                            <span class="icon"
+                                  *ngIf="list.sortIcon"
+                                  (click)="clickSort()">
+                                    <i class="nb-chevron-up"></i>
+                                    <i class="nb-chevron-down"></i>
+                                </span>
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="table-body">
+                    <tr *ngFor="let item of tableList; let i = index;"
+                        [ngClass]="{inputClass: item.isSelect}">
+                        <td>{{item.openId}}</td>
+                        <td>{{item.nickname}}</td>
+                        <td class="user-head">
+                            <img [src]='item.headImg ? item.headImg : headImg' alt="微信头像">
+                        </td>
+                        <td>{{item.memNum}}</td>
+                        <td>{{item.deviceCount|| 0}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </nb-card-body>
+</nb-card>

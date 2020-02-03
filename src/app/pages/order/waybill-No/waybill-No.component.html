@@ -1,0 +1,28 @@
+<nb-card>
+    <nb-card-header>
+        <div>请填写运单号</div>
+    </nb-card-header>
+
+    <nb-card-body>
+        <div class="edit-body">
+            <div class="row list-row">
+                <div class="input-panel">
+                    <div class="row-input">
+                        <div class="editable" >
+                            <input type="text"
+                                   [(ngModel)]="trackNumber"
+                                   placeholder="输入运单号"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+
+    <nb-card-footer>
+        <div class="footer-box">
+            <button class="sure" (click)="isSure()">确定</button>
+            <button class="cancel" (click)="cancel()">取消</button>
+        </div>
+    </nb-card-footer>
+</nb-card>
