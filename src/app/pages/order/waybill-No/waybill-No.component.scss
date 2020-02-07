@@ -1,95 +1,25 @@
 @import '../../../@theme/styles/themes';
 
-.area-name{
-    align-items: flex-start!important;
-}
-
-.row-name{
-    i{
-        font-size: 1rem;
-        color: #ff000e;
-    }
-}
-
-.agent{
-    width: calc(100% - 8rem) !important;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    .area-list{
-        width: 100%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .select-width{
-        width: 49%!important;
-    }
-    .area-box{
-        width: 100%;
-        max-height: 5rem;
-        border: 1px solid #edf1f7;
-        margin-top: 3px;
-        display: inline-flex;
-        justify-content: flex-start;
-        align-items: flex-start;
-        overflow: auto;
-        background: #f7f9fc;
-        ul{
-            width: 100%;
-            list-style: none;
-            margin-bottom: 2px;
-            li{
-                padding: 4px 3px;
-                font-size: .8rem;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                span{
-                    display: inline-flex;
-                }
-                i{
-                    margin-left: 10px;
-                    font-size: x-large;
-                    cursor: pointer;
-                }
-            }
-        }
-    }
-}
-
 .list-row{
     display: flex;
     align-items: center;
     justify-content: space-between;
     .input-panel {
-        width: calc(50% - 10px);
-        margin-left: 10px;
+        width: 100%;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
+        input[type=text]{
+            height: 50px;
+            width: 80%;
+            border: 1px solid #edf1f7;
+            background-color: #f7f9fc;
+            padding-left: 10px;
+            margin: 15px 0;
+        }
     }
     .input-panel:first-child {
         margin-left: 0;
-    }
-
-    .query-btn{
-        border-color: #00d68f;
-        color: #fff;
-        padding: .4875rem .925rem;
-        border-style: solid;
-        border-width: .0625rem;
-        border-radius: .25rem;
-        font-size: .875rem;
-        line-height: 1rem;
-        margin-left: 2px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #00d68f;
-        cursor: pointer;
-        outline: none;
     }
 }
 

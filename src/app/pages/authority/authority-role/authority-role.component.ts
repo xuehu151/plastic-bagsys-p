@@ -16,9 +16,11 @@ export class AuthorityRoleComponent implements OnInit {
     tableTitle: Array<any> = [];
     tableList: Array<any> = [];
     // private roleName: string;
-    private auth: string;
-    private currPage: number = 1;
-    private pageSize: number = 15;
+    auth: string;
+    currPage: number = 1;
+    pageSize: number = 15;
+    totalCount: number = 0;
+    totalPage: number = 0;
 
     constructor ( private http: HttpCustormClient,
                   private modalService: NgbModal,
@@ -71,6 +73,8 @@ export class AuthorityRoleComponent implements OnInit {
             // console.info(res);
             if ( res.code === 10000 ) {
                 this.tableList = res.data.records;
+                this.totalCount = res.data.totalCount;
+                this.totalPage = Math.ceil(res.data.totalCount / this.pageSize);
                 this.tableList.forEach(item => {
                     item.isShowInput = false;
                     item.isSelect = true;
@@ -94,6 +98,11 @@ export class AuthorityRoleComponent implements OnInit {
             keyboard: false
         });
         activeModal.componentInstance.item = item;
+    }
+
+    changePage ( $event ) {
+        this.currPage = $event;
+        this.getRoleList();
     }
 
 }

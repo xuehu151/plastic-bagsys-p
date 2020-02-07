@@ -1,0 +1,63 @@
+<ul class="pagination">
+    <li class="page-item">
+        <a class="page-link"
+           (click)="pageChange(1)"
+           [ngClass]="{endOrStart: page !== 1}">
+            首页
+        </a>
+    </li>
+    <li class="page-item">
+        <a class="page-link"
+           (click)="goPrevious(page-1)"
+           [ngClass]="{endOrStart: page !== 1}">
+            上一页
+        </a>
+    </li>
+    <li class="page-item" *ngIf="start > 2">
+        <a class="page-link" (click)="pageChange(1)">1</a>
+    </li>
+    <li class="page-item" *ngIf="start > 2">
+        <a class="page-link">...</a>
+    </li>
+    <li class="page-item"
+        *ngFor="let pageNumber of pages"
+        [ngClass]="pageNumber == page ? 'active': ''">
+        <a class="page-link" (click)="!!pageChange(pageNumber)">
+            {{pageNumber}}
+            <span *ngIf="pageNumber === page" class="sr-only">(current)</span>
+        </a>
+    </li>
+    <li class="page-item" *ngIf="end < totalPage-2">
+        <a class="page-link">...</a>
+    </li>
+    <li class="page-item" *ngIf="end < totalPage-2">
+        <a class="page-link" (click)="pageChange(totalPage)">
+            {{totalPage}}
+        </a>
+    </li>
+    <li class="page-item">
+        <a class="page-link"
+           (click)="goNext(page+1)"
+           [ngClass]="{endOrStart: page !== totalPage}">
+            下一页
+        </a>
+    </li>
+    <li class="page-item">
+        <a class="page-link"
+           (click)="pageChange(totalPage)"
+           [ngClass]="{endOrStart: page !== totalPage}">
+            末页
+        </a>
+    </li>
+    <li class="page-item search">
+        <input type="number"
+                class="text"
+                min="1"
+                max="{{totalPage}}"
+                (keydown.enter)="onEnter()"
+                [(ngModel)]="searchPage"/>
+    </li>
+    <li class="page-item">
+        <input type="button" class="go" value="GO" (click)="jump()"/>
+    </li>
+</ul>

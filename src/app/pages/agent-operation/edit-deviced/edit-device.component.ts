@@ -14,14 +14,14 @@ import { ServiceConfig } from '../../../providers/service.config';
 
 export class EditDeviceComponent implements OnInit {
     @Input() data: any;
-    private price: number = 0;
-    private cost: number = 0;
-    private userId: number;
-    private holderName: string;
-    private goodsList: Array<any> = [];
-    private cityData: Array<any> = [];
-    private cityArray: Array<any> = [];
-    private proviceData: Array<any> = [];
+    price: number = 0;
+    cost: number = 0;
+    userId: number;
+    holderName: string;
+    goodsList: Array<any> = [];
+    cityData: Array<any> = [];
+    cityArray: Array<any> = [];
+    proviceData: Array<any> = [];
 
     constructor ( private activeModal: NgbActiveModal,
                   private areaDataService: AreaDataService,

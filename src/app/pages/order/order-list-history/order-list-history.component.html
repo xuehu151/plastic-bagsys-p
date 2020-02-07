@@ -19,7 +19,7 @@
                         <div class="input-panel">
                             <span class="row-name">操作人姓名</span>
                             <div class="row-input">
-                                <input type="text" [(ngModel)]="operatorName" placeholder="输入姓名">
+                                <input type="text" [(ngModel)]="handleUserName" placeholder="输入姓名">
                             </div>
                         </div>
                     </div>
@@ -34,9 +34,8 @@
                             <span class="row-name">订单状态</span>
                             <div class="row-input">
                                 <select  [(ngModel)]="status">
-                                    <option value="0" disabled>请选择</option>
+                                    <option value="" disabled>请选择</option>
                                     <option value="1">待支付</option>
-                                    <option value="2">已支付</option>
                                     <option value="3">已发货</option>
                                 </select>
                             </div>
@@ -44,9 +43,9 @@
                         <div class="input-panel">
                             <span class="row-name">选择物品</span>
                             <div class="row-input">
-                                <select  [(ngModel)]="choiceGoods">
-                                    <option value="0" disabled>请选择</option>
-                                    <option *ngFor="let goods of goodsList">
+                                <select  [(ngModel)]="goodsId">
+                                    <option value="" disabled>请选择</option>
+                                    <option *ngFor="let goods of goodsList" [value]="goods.id">
                                         {{goods.name}}
                                     </option>
                                 </select>
@@ -108,22 +107,31 @@
                 <tbody class="table-body">
                 <tr *ngFor="let item of tableList; let i = index;"
                     [ngClass]="{inputClass: item.isSelect}">
-                    <td class="role-name">{{i+1}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.phone}}</td>
-                    <td>{{item.compName}}</td>
-                    <td>{{item.level | levelAgent}}</td>
-                    <td>{{item.managerPhone}}</td>
-                    <td>{{item.areaGroup || '未知'}}</td>
-                    <td>{{item.deviceCount|| 0}}</td>
-                    <td  class="operator" *ngIf="item.isOperation">
-                        <span (click)="fillBillNumber(item)">
-                            {{item.editButtonText}}
-                        </span>
-                    </td>
+                    <td class="role-name">{{item.consignee}}</td>
+                    <td>{{item.signeeMobile}}</td>
+                    <td>{{item.goodsName}}</td>
+                    <td>{{item.count || 0}}</td>
+                    <td>{{item.createTime}}</td>
+                    <td>{{item.editTime}}</td>
+                    <td>{{item.address}}</td>
+                    <td>{{item.price|| 0}}</td>
+                    <td>{{item.status | orderStatus}}</td>
+                    <td>{{item.trackNum}}</td>
+                    <td>{{item.handleUserName}}</td>
+                    <td>{{item.remark}}</td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </nb-card-body>
+    <nb-card-footer>
+        <ng-page
+            *ngIf="tableList != null && tableList.length"
+            [totalPage]="totalPage"
+            (changePage)="changePage($event)"
+            [(page)]="currPage"
+            [pageSize]="pageSize"
+            [collectionSize]="totalCount"
+            [maxSize]="5"></ng-page>
+    </nb-card-footer>
 </nb-card>

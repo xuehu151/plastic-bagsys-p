@@ -1,0 +1,100 @@
+//分页
+.pageNumber {
+    padding: 1.25rem;
+    font-size: 1.4rem;
+    color: white;
+    .totalPage {
+        margin-left: 1.25rem;
+    }
+}
+.pageInfo {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background: #1d244d;
+}
+
+ng-page {
+    padding: 1.25rem;
+    font-size: 1.4rem;
+    /deep/ .active {
+        .page-link {
+            padding: .2rem .5rem;
+            font-size: 1.2rem !important;
+            background-color: #7f95ff !important;
+            border-color: #7f95ff !important;
+            color: white !important;
+        }
+    }
+    /deep/ .disabled {
+        .page-link {
+            background-color: #1a2246 !important;
+            border-color: #416c8a !important;
+            color: #416c8a !important;
+        }
+    }
+    /deep/ .page-item {
+        .page-link {
+            padding: .2rem .5rem;
+            font-size: 1.2rem !important;
+            background-color: #222a59;
+            border-color: #7f95ff;
+            color: #7f95ff;
+        }
+        .text {
+            background-color: #222a59;
+            border-color: #7f95ff;
+            color: white;
+            font-size: 12px;
+        }
+        .go {
+            width: 40px;
+            background-color: #7f95ff;
+            border-color: #7f95ff;
+            color: white;
+            font-size: 14px;
+            padding: 0 4px;
+        }
+        .endOrStart {
+            color: white;
+        }
+    }
+    /deep/ .search {
+        border: 1px solid #7f95ff;
+        margin: 0 5px;
+    }
+}
+
+.pagination{
+    margin-bottom: 0;
+}
+.pagination li{
+    cursor: pointer;
+}
+.page-item{
+    input{
+        border: none;
+    }
+    .text{
+        float: left;
+        width: 40px;
+        height: 100%;
+        text-align: center;
+        border: 1px solid #dee2e6;
+    }
+    .go{
+        float: left;
+        height: 100%;
+        color: white;
+        cursor: pointer;
+        background: #007bff;
+    }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}

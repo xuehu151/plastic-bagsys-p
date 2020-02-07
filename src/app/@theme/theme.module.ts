@@ -43,25 +43,15 @@ import { NbSecurityModule } from '@nebular/security';
 import {
     FooterComponent,
     HeaderComponent,
-    SearchInputComponent,
-    ThemeSettingsComponent,
-    SwitcherComponent,
-    LayoutDirectionSwitcherComponent,
-    TinyMCEComponent,
-    ToggleSettingsButtonComponent,
 } from './components';
 import {
     RolePipe,
     LevelPipe,
     RunStatusPipe,
     FloatNumberPipe,
-
-    CapitalizePipe,
-    PluralPipe,
-    RoundPipe,
-    TimingPipe,
-    NumberWithCommasPipe,
-    EvaIconsPipe,
+    OrderStatusPipe,
+    BusinessStatusPipe,
+    PurchaseStatusPipe,
 } from './pipes';
 import {
     OneColumnLayoutComponent,
@@ -74,6 +64,7 @@ import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { RouterModule } from "@angular/router";
 import { TableComponent } from "./components/table-component/table.component";
+import { PageComponent } from "./components/page/page.component";
 
 const BASE_MODULES = [
     CommonModule,
@@ -123,15 +114,10 @@ const COMPONENTS = [
     HeaderComponent,
     FooterComponent,
     TableComponent,
-    SwitcherComponent,
-    LayoutDirectionSwitcherComponent,
-    SearchInputComponent,
-    ThemeSettingsComponent,
-    TinyMCEComponent,
+    PageComponent,
     OneColumnLayoutComponent,
     ThreeColumnsLayoutComponent,
     TwoColumnsLayoutComponent,
-    ToggleSettingsButtonComponent,
 ];
 
 const ENTRY_COMPONENTS = [
@@ -142,13 +128,9 @@ const PIPES = [
     LevelPipe,
     RunStatusPipe,
     FloatNumberPipe,
-
-    CapitalizePipe,
-    PluralPipe,
-    RoundPipe,
-    TimingPipe,
-    NumberWithCommasPipe,
-    EvaIconsPipe,
+    OrderStatusPipe,
+    BusinessStatusPipe,
+    PurchaseStatusPipe,
 ];
 
 const NB_THEME_PROVIDERS = [

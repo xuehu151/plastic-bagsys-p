@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Toastrervice } from "../../../providers/toastrService";
 import { HttpCustormClient } from '../../../providers/HttpClient'
 import { WaybillNoComponent } from '../waybill-No/waybill-No.component';
 import { AreaDataService } from '../../../providers/areaDataService';
+import { ServiceConfig } from '../../../providers/service.config';
 
 @Component({
     selector: 'ngx-order-list',
@@ -15,16 +15,17 @@ import { AreaDataService } from '../../../providers/areaDataService';
 export class OrderListComponent implements OnInit {
     tableTitle: Array<any> = [];
     tableList: Array<any> = [];
-    private goodsList: Array<any> = [];
-    private receivGoodsName: string;
-    private receivGoodsPhone: string;
-    private orderStatus: number = 0;
-    private purchaser: string;
-    private transactionNum: string;
-    private deviceId: string;
-    private status: number = 0;
-    private choiceGoods: number = 0;
-    private applyDate: string;
+    goodsList: Array<any> = [];
+    consignee: string;
+    signeeMobile: string;
+    orderStatus: string = '';
+    goodsId: string = '';
+    status: number = 0;
+    applyDate: string;
+    currPage: number = 1;
+    pageSize: number = 15;
+    totalCount: number = 0;
+    totalPage: number = 0;
 
     constructor ( private areaDataService: AreaDataService,
                   private modalService: NgbModal,
@@ -93,13 +94,40 @@ export class OrderListComponent implements OnInit {
             },
         ];
         this.goodsList = this.areaDataService.getGoodsList();
+        this.searchOrderList();
     }
 
     searchOrderList (): void {
-
+        let params = {
+            currPage: this.currPage,
+            pageSize: this.pageSize,
+            entity: {
+                consignee: this.consignee,
+                signeeMobile: this.signeeMobile,
+                status: this.orderStatus,
+                goodsId: this.goodsId
+            }
+        };
+        this.http.post(ServiceConfig.PURCHASE, params, ( res ) => {
+            console.info(res);
+            if ( res.code === 10000 ) {
+                this.tableList = res.data.records;
+                this.totalCount = res.data.totalCount;
+                this.totalPage = Math.ceil(res.data.totalCount / this.pageSize);
+                this.tableList.forEach(item => {
+                    item.isShowInput = false;
+                    item.isSelect = true;
+                    item.isOperation = true;
+                    item.fillBillNumberText = '填写快递单号';
+                })
+            }
+            else {
+                this.toastr.showToast('danger', '', res.message);
+            }
+        })
     }
 
-    fillBillNumber (): void {
+    fillBillNumber (item): void {
         //新增
         const activeModal = this.modalService.open(WaybillNoComponent, {
             size: 'lg',
@@ -108,6 +136,7 @@ export class OrderListComponent implements OnInit {
             backdrop: 'static',
             keyboard: false
         });
+        activeModal.componentInstance.data = item;
         activeModal.result.then(result => {
             if ( result == 'success' ) {
                 this.searchOrderList();
@@ -122,5 +151,9 @@ export class OrderListComponent implements OnInit {
 
     }
 
+    changePage ( $event ) {
+        this.currPage = $event;
+        this.searchOrderList();
+    }
 
 }

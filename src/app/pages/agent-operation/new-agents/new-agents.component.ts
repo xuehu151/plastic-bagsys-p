@@ -12,20 +12,20 @@ import { AreaDataService } from '../../../providers/areaDataService';
 })
 
 export class AddAgentsComponent implements OnInit {
-    private name: string = '';
-    private phone: string;
-    private compName: string;
-    private managerPhone: string;
-    private agentLevel: string = '1';
-    private provinceName: string = '';
-    private cityName: string = '';
-    private agentPassword: string = '';
-    private areaInfo: Array<any> = [];
-    private proviceData: Array<any> = [];
-    private cityData: Array<any> = [];
-    private cityArray: Array<any> = [];
-    private cityId: number;
-    private provinceId: number;
+    name: string = '';
+    phone: string;
+    compName: string;
+    managerPhone: string;
+    agentLevel: string = '1';
+    provinceName: string = '';
+    cityName: string = '';
+    agentPassword: string = '';
+    areaInfo: Array<any> = [];
+    proviceData: Array<any> = [];
+    cityData: Array<any> = [];
+    cityArray: Array<any> = [];
+    cityId: number;
+    provinceId: number;
 
     constructor ( private activeModal: NgbActiveModal,
                   private areaDataService: AreaDataService,

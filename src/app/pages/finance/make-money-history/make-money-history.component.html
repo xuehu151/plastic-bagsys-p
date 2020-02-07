@@ -5,23 +5,23 @@
                 <div class="edit-body">
                     <div class="row">
                         <div class="input-panel">
-                            <span class="row-name">代理商姓名</span>
+                            <span class="row-name">收款人姓名</span>
                             <div class="row-input">
-                                <input type="text" [(ngModel)]="agentName" placeholder="输入代理商姓名">
+                                <input type="text" [(ngModel)]="payeeName" placeholder="输入代理商姓名">
                             </div>
                         </div>
                         <div class="input-panel">
-                            <span class="row-name">代理商手机号</span>
+                            <span class="row-name">收款人手机号</span>
                             <div class="row-input">
-                                <input type="text" [(ngModel)]="agentTelephone" placeholder="输入代理商手机号">
+                                <input type="text" [(ngModel)]="payeephone" placeholder="输入代理商手机号">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="header-btn">
-                <button class="search" (click)="searchPayList()">搜索</button>
-                <button class="add" (click)="exportExcel()">导出</button>
+                <button class="search" (click)="searchPayHistoryList()">搜索</button>
+                <button class="add" (click)="exportPayHistoryExcel()">导出</button>
             </div>
         </div>
     </nb-card-header>
@@ -29,14 +29,60 @@
 
 <nb-card>
     <nb-card-body>
-        <ng-table
-            [tableTitle] = tableTitle
-            [tableList] = tableList
-            [signatureIdArr]="signatureIdArr"
-            (editItem) = "refusePayMoney($event)"
-            (operateItem) = "editRefusePay($event)"
-            (selectAllData)="selectAllPayData($event)"
-            (selectOneData)="selectPayOneData($event)"
-            (sortEvent)="sortPayList($event)"></ng-table>
+        <div class="table-panel">
+            <table class="table">
+                <thead class="table-head">
+                    <tr>
+                        <th *ngFor="let list of tableTitle let i = index;"
+                            [hidden]="!list.isShowInput"
+                            [ngClass]="{inputClass: list.isSelect}">
+                            <div class="">
+                                <input type="checkbox"
+                                       id="all"
+                                       *ngIf="list.isSelect"
+                                       [checked]=list.isChecked
+                                       (change)="selectAll($event)">
+                            </div>
+                            <div class="table-title">
+                                <span>{{list.title}}</span>
+                                <span class="icon"
+                                      *ngIf="list.sortIcon"
+                                      (click)="clickSort()">
+                                    <i class="nb-chevron-up"></i>
+                                    <i class="nb-chevron-down"></i>
+                                </span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="table-body">
+                <tr *ngFor="let item of tableList; let i = index;"
+                    [ngClass]="{inputClass: item.isSelect}">
+                    <td class="role-name">{{item.agentId}}</td>
+                    <td>{{item.bankAccount}}</td>
+                    <td>{{item.bankPhone}}</td>
+                    <td>{{item.idCard}}</td>
+                    <td>{{item.bankName}}</td>
+                    <td>{{item.bankCard}}</td>
+                    <td>{{item.amount}}</td>
+                    <td class="role-name">{{item.createTime}}</td>
+                    <td>{{item.auditName}}</td>
+                    <td>{{item.editTime}}</td>
+                    <td>{{item.status===3?'拒绝':item.status===2?'已打款':''}}</td>
+                    <td>{{item.remarks}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </nb-card-body>
+    <nb-card-footer>
+        <ng-page
+            *ngIf="tableList != null && tableList.length"
+            [totalPage]="totalPage"
+            (changePage)="changePage($event)"
+            [(page)]="currPage"
+            [pageSize]="pageSize"
+            [collectionSize]="totalCount"
+            [maxSize]="5"></ng-page>
+    </nb-card-footer>
 </nb-card>

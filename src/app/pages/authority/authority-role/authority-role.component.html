@@ -48,4 +48,14 @@
             </table>
         </div>
     </nb-card-body>
+    <nb-card-footer>
+        <ng-page
+            *ngIf="tableList != null && tableList.length"
+            [totalPage]="totalPage"
+            (changePage)="changePage($event)"
+            [(page)]="currPage"
+            [pageSize]="pageSize"
+            [collectionSize]="totalCount"
+            [maxSize]="5"></ng-page>
+    </nb-card-footer>
 </nb-card>

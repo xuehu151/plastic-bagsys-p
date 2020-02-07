@@ -7,7 +7,7 @@
                         <div class="input-panel">
                             <span class="row-name">订单号</span>
                             <div class="row-input">
-                                <input type="text" [(ngModel)]="orderNum" placeholder="输入代订单号">
+                                <input type="text" [(ngModel)]="sn" placeholder="输入订单号">
                             </div>
                         </div>
                         <div class="input-panel">
@@ -27,13 +27,13 @@
                         <div class="input-panel">
                             <span class="row-name">购买者</span>
                             <div class="row-input">
-                                <input type="text" [(ngModel)]="purchaser " placeholder="输入用户编号">
+                                <input type="text" [(ngModel)]="memberId " placeholder="输入用户编号">
                             </div>
                         </div>
                         <div class="input-panel">
                             <span class="row-name">交易号</span>
                             <div class="row-input">
-                                <input type="text" [(ngModel)]="transactionNum " placeholder="输入交易号">
+                                <input type="text" [(ngModel)]="transactionNo " placeholder="输入交易号">
                             </div>
                         </div>
                         <div class="input-panel">
@@ -47,10 +47,11 @@
                         <div class="input-panel">
                             <span class="row-name">交易状态</span>
                             <div class="row-input">
-                                <select  [(ngModel)]="status ">
-                                    <option value="0" disabled>请选择</option>
-                                    <option value="1">成功</option>
-                                    <option value="2">异常</option>
+                                <select  [(ngModel)]="status">
+                                    <option value="" disabled>请选择</option>
+                                    <option value="1">未处理</option>
+                                    <option value="2">成功</option>
+                                    <option value="3">异常</option>
                                 </select>
                             </div>
                         </div>
@@ -58,9 +59,8 @@
                 </div>
             </div>
             <div class="header-btn">
-                <button class="search" (click)="searchAgentList()">搜索</button>
-                <button class="export" (click)="exportAgentExcel()">导出</button>
-                <button class="add" (click)="addAgent()">新增</button>
+                <button class="search" (click)="searchDeviceOrderList()">搜索</button>
+                <button class="export" (click)="exportDeviceExcel()">导出</button>
             </div>
         </div>
     </nb-card-header>
@@ -95,22 +95,20 @@
                 </tr>
                 </thead>
                 <tbody class="table-body">
-                <tr *ngFor="let item of tableList; let i = index;"
-                    [ngClass]="{inputClass: item.isSelect}">
-                    <td class="role-name">{{i+1}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.phone}}</td>
-                    <td>{{item.compName}}</td>
-                    <td>{{item.level | levelAgent}}</td>
-                    <td>{{item.managerPhone}}</td>
-                    <td>{{item.areaGroup || '未知'}}</td>
-                    <td>{{item.deviceCount|| 0}}</td>
-                    <td  class="operator" *ngIf="item.isOperation">
-                            <span (click)="startEditAgent(item)">
-                                {{item.editButtonText}}
-                            </span>
-                    </td>
-                </tr>
+                    <tr *ngFor="let item of tableList; let i = index;"
+                        [ngClass]="{inputClass: item.isSelect}">
+                        <td class="role-name">{{item.sn}}</td>
+                        <td>{{item.userName}}</td>
+                        <td>{{item.deviceId}}</td>
+                        <td class="role-name">{{item.address}}</td>
+                        <td>{{item.price}}</td>
+                        <td>{{item.profitPercent}}</td>
+                        <td>{{item.profitBalance}}</td>
+                        <td>{{item.memberId}}</td>
+                        <td  class="role-name">{{item.transactionNo}}</td>
+                        <td>{{item.createTime}}</td>
+                        <td>{{item.status | businessStatus}}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

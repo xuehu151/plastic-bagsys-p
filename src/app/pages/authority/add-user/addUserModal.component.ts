@@ -18,11 +18,11 @@ import { ServiceConfig } from '../../../providers/service.config';
 })
 
 export class AddUserModalComponent implements OnInit {
-    private username: string;
-    private userTelephone: string;
-    private roleId: number = 0;
-    private userRole: string = '';
-    private roleList: Array<any> = [];
+    username: string;
+    userTelephone: string;
+    roleId: number = 0;
+    userRole: string = '';
+    roleList: Array<any> = [];
 
     constructor ( private activeModal: NgbActiveModal,
                   private http: HttpCustormClient,

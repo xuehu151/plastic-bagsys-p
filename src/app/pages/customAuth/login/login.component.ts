@@ -13,8 +13,8 @@ import { Toastrervice } from "../../../providers/toastrService";
 
 export class LoginComponent implements AfterViewInit, OnInit {
     @ViewChild('loginDiv') loginDiv: ElementRef;
-    username: string = '15191061207';
-    password: string = '123456789';
+    username: string = '13072923459';
+    password: string = '923459';
     configInfo: Object;
     errInfo: string = '';
 

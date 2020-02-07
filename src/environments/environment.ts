@@ -11,8 +11,8 @@
 console.log(location.origin);
 let url = location.origin + '/';
 export const environment = {
-  production: false,
+    production: false,
     // apiBase: url,
-    apiBase : 'http://39.97.227.149:10001/'
+    apiBase: 'http://39.97.227.149:10001/'
 
 };

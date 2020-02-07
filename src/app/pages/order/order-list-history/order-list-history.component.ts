@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Toastrervice } from "../../../providers/toastrService";
 import { AreaDataService } from '../../../providers/areaDataService';
+import { HttpCustormClient } from '../../../providers/HttpClient'
+import { ServiceConfig } from '../../../providers/service.config';
 
 @Component ({
     selector: 'ngx-order-list-history',
@@ -11,16 +13,22 @@ import { AreaDataService } from '../../../providers/areaDataService';
 export class OrderListHistoryComponent implements OnInit {
     tableTitle: Array<any> = [];
     tableList: Array<any> = [];
-    private goodsList = [];
-    private consignee: string;
-    private signeeMobile: string;
-    private operatorName: string;
-    private trackNum: string;
-    private status: number = 0;
-    private applyDate: string;
-    private issuanceDate: string;
+    goodsList = [];
+    consignee: string;
+    signeeMobile: string;
+    handleUserName: string;
+    trackNum: string;
+    status: string = '';
+    goodsId: string = '';
+    applyDate: string;
+    issuanceDate: string;
+    currPage: number = 1;
+    pageSize: number = 15;
+    totalCount: number = 0;
+    totalPage: number = 0;
 
     constructor ( private areaDataService: AreaDataService,
+                  private http: HttpCustormClient,
                   private toastr: Toastrervice, ) {
     }
 
@@ -95,6 +103,7 @@ export class OrderListHistoryComponent implements OnInit {
             },
         ];
         this.goodsList = this.areaDataService.getGoodsList();
+        this.searchOrderHistoryList();
     }
 
     exportOrderHistoryExcel (): void {
@@ -102,7 +111,38 @@ export class OrderListHistoryComponent implements OnInit {
     }
 
     searchOrderHistoryList(): void{
+        let params = {
+            currPage: this.currPage,
+            pageSize: this.pageSize,
+            entity: {
+                consignee: this.consignee,
+                goodsId: this.goodsId,
+                signeeMobile: this.signeeMobile,
+                status: this.status,
+                handleUserName: this.handleUserName,
+                trackNum: this.trackNum
+            }
+        };
+        this.http.post(ServiceConfig.PURCHASE, params, ( res ) => {
+            console.info(res);
+            if ( res.code === 10000 ) {
+                this.tableList = res.data.records;
+                this.totalCount = res.data.totalCount;
+                this.totalPage = Math.ceil(res.data.totalCount / this.pageSize);
+                this.tableList.forEach(item => {
+                    item.isShowInput = false;
+                    item.isSelect = true;
+                })
+            }
+            else {
+                this.toastr.showToast('danger', '', res.message);
+            }
+        })
+    }
 
+    changePage ( $event ) {
+        this.currPage = $event;
+        this.searchOrderHistoryList();
     }
 
 }

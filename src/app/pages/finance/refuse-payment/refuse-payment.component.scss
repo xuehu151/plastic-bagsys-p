@@ -56,3 +56,12 @@
     background-color: #fa0;
     border-color: #fa0;
 }
+
+.role-name{
+    width: 6rem;
+}
+
+input[type="checkbox"]:checked:after {
+    color: white;
+    background: #36f url(../../../../assets/images/selCheck.svg) no-repeat right;
+}

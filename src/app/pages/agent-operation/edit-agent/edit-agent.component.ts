@@ -12,16 +12,16 @@ import { ServiceConfig } from '../../../providers/service.config';
 
 export class EditAgentComponent implements OnInit {
     @Input() agentData: any;
-    private compName: string;
-    private provinceName: string = '';
-    private cityName: string = '';
-    private agentPassword: string = '';
-    private areaInfo: Array<any> = [];
-    private proviceData: Array<any> = [];
-    private cityData: Array<any> = [];
-    private cityArray: Array<any> = [];
-    private cityId: number;
-    private provinceId: number;
+    compName: string;
+    provinceName: string = '';
+    cityName: string = '';
+    agentPassword: string = '';
+    areaInfo: Array<any> = [];
+    proviceData: Array<any> = [];
+    cityData: Array<any> = [];
+    cityArray: Array<any> = [];
+    cityId: number;
+    provinceId: number;
 
     constructor ( private activeModal: NgbActiveModal,
                   private http: HttpCustormClient,

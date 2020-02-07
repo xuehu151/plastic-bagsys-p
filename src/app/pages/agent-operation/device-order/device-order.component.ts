@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
 import { Toastrervice } from "../../../providers/toastrService";
+import { HttpCustormClient } from '../../../providers/HttpClient'
+import { ServiceConfig } from '../../../providers/service.config';
 
 @Component ({
     selector: 'ngx-device-order',
@@ -11,16 +12,19 @@ import { Toastrervice } from "../../../providers/toastrService";
 export class DeviceOrderComponent implements OnInit {
     tableTitle: Array<any> = [];
     tableList: Array<any> = [];
-    private orderNum: string;
-    private agentName: string;
-    private address: string;
-    private purchaser: string;
-    private transactionNum: string;
-    private deviceId: string;
-    private status: number = 0;
+    sn: string;
+    transactionNo: string;
+    agentName: string;
+    address: string;
+    memberId: number;
+    deviceId: number;
+    status: string = '';
+    currPage: number = 1;
+    pageSize: number = 15;
+    totalCount: number = 0;
+    totalPage: number = 0;
 
-
-    constructor ( private router: Router,
+    constructor ( private http: HttpCustormClient,
                   private toastr: Toastrervice, ) {
     }
 
@@ -89,6 +93,42 @@ export class DeviceOrderComponent implements OnInit {
                 isShowInput: true
             },
         ];
+        this.searchDeviceOrderList();
+    }
+
+    searchDeviceOrderList(): void{
+        let params = {
+            currPage: this.currPage,
+            pageSize: this.pageSize,
+            entity: {
+                address: this.address,
+                agentName: this.agentName,
+                deviceId: this.deviceId,
+                memberId: this.memberId,
+                sn: this.sn,
+                status: this.status,
+                transactionNo: this.transactionNo
+            }
+        };
+        this.http.post(ServiceConfig.SCANORDER, params, ( res ) => {
+            console.info(res);
+            if ( res.code === 10000 ) {
+                this.tableList = res.data.records;
+                this.totalCount = res.data.totalCount;
+                this.totalPage = Math.ceil(res.data.totalCount / this.pageSize);
+                this.tableList.forEach(item => {
+                    item.isShowInput = false;
+                    item.isSelect = true;
+                })
+            }
+            else {
+                this.toastr.showToast('danger', '', res.message);
+            }
+        })
+    }
+
+    exportDeviceExcel(): void{
+
     }
 
 }

@@ -12,8 +12,8 @@ import { ServiceConfig } from '../../../providers/service.config';
 
 export class EditUserModalComponent implements OnInit {
     @Input() data: any;
-    private roleList: Array<any> = [];
-
+    roleList: Array<any> = [];
+    roleId: string = '';
 
     constructor( private activeModal: NgbActiveModal,
                  private http: HttpCustormClient,
@@ -47,7 +47,7 @@ export class EditUserModalComponent implements OnInit {
             id: this.data.id,
             name: this.data.name,
             phone: this.data.phone,
-            roleId: 0
+            roleId: this.roleId
         };
         if ( !this.data.name ) {
             this.toastr.showToast('danger', '', '输入姓名');

@@ -16,22 +16,24 @@ import { ServiceConfig } from '../../../providers/service.config';
 export class DeviceManageComponent implements OnInit {
     tableTitle: Array<any> = [];
     tableList: Array<any> = [];
-    private areaInfo: Array<any> = [];
-    private proviceData: Array<any> = [];
-    private cityData: Array<any> = [];
-    private cityArray: Array<any> = [];
-    private deviceId: string;
-    private agentName: string;
-    private agentPhone: string;
-    private deviceCode: string;
-    private address: string;
-    private managerPhone: string;
-    private provinceId: string = '';
-    private cityId: string = '';
-    private currPage: number = 1;
-    private pageSize: number = 15;
-    private runStatus: number = 1;
-    private isEnable: number = 1;
+    areaInfo: Array<any> = [];
+    proviceData: Array<any> = [];
+    cityData: Array<any> = [];
+    cityArray: Array<any> = [];
+    deviceId: string;
+    agentName: string;
+    agentPhone: string;
+    deviceCode: string;
+    address: string;
+    managerPhone: string;
+    provinceId: string = '';
+    cityId: string = '';
+    currPage: number = 1;
+    pageSize: number = 15;
+    totalCount: number = 0;
+    totalPage: number = 0;
+    runStatus: number = 1;
+    isEnable: number = 1;
 
     constructor ( private http: HttpCustormClient,
                   private areaDataService: AreaDataService,
@@ -163,6 +165,8 @@ export class DeviceManageComponent implements OnInit {
             console.info(res);
             if ( res.code === 10000 ) {
                 this.tableList = res.data.records;
+                this.totalCount = res.data.totalCount;
+                this.totalPage = Math.ceil(res.data.totalCount / this.pageSize);
                 this.tableList.forEach(item => {
                     item.isShowInput = false;
                     item.isSelect = true;
@@ -236,5 +240,9 @@ export class DeviceManageComponent implements OnInit {
         });
     }
 
+    changePage ( $event ) {
+        this.currPage = $event;
+        this.searchDeviceList();
+    }
 
 }

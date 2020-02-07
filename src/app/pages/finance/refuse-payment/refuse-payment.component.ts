@@ -3,6 +3,8 @@ import { Toastrervice } from "../../../providers/toastrService";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DialogBoxModalComponent } from "../dialog/dialogBoxModal.component";
 import { RefuseRemarkComponent } from "../refuseRemark/refuseRemark.component";
+import { ServiceConfig } from '../../../providers/service.config';
+import { HttpCustormClient } from '../../../providers/HttpClient'
 
 @Component({
     selector: 'ngx-refuse-payment',
@@ -14,12 +16,18 @@ export class RefusePaymentComponent implements OnInit {
     tableTitle: Array<any> = [];
     tableList: Array<any> = [];
     signatureIdArr: Array<any> = [];
-    private agentName: string;
-    private agentTelephone: string;
+    payeeName: string;
+    payeephone: string;
     id: string;
-
+    currPage: number = 1;
+    pageSize: number = 15;
+    totalCount: number = 0;
+    totalPage: number = 0;
+    sortArg: number = 2;
+    statusArr = [ 1 ];
 
     constructor ( private modalService: NgbModal,
+                  private http: HttpCustormClient,
                   private toastr: Toastrervice, ) {
     }
 
@@ -29,26 +37,46 @@ export class RefusePaymentComponent implements OnInit {
                 title: '',
                 isSelect: true,
                 isChecked: false,
-                isShowInput: true,
+                isShowInput: false,
                 isOperation: true
             },
             {
-                title: '用户姓名',
+                title: '代理商ID',
                 sortIcon: false,
                 isShowInput: true
             },
             {
-                title: '用户手机号',
+                title: '姓名',
                 sortIcon: false,
                 isShowInput: true
             },
             {
-                title: '当前角色',
+                title: '手机号',
                 sortIcon: false,
                 isShowInput: true
             },
             {
-                title: '创建时间',
+                title: '身份证号',
+                sortIcon: false,
+                isShowInput: true
+            },
+            {
+                title: '开户行',
+                sortIcon: false,
+                isShowInput: true
+            },
+            {
+                title: '银行卡号',
+                sortIcon: false,
+                isShowInput: true
+            },
+            {
+                title: '申请金额',
+                sortIcon: false,
+                isShowInput: true
+            },
+            {
+                title: '申请时间',
                 sortIcon: true,
                 isShowInput: true
             },
@@ -58,59 +86,10 @@ export class RefusePaymentComponent implements OnInit {
                 isShowInput: true
             }
         ];
-        this.tableList = [
-            {
-                sid: 1,
-                name: '李强',
-                age: 30,
-                address: '西安市',
-                isShowInput: true,
-                creatTime: '2020-01-19 10:02:56',
-                isSelect: true,
-                editButtonText: '已打款',
-                deleteButtonText: '拒绝',
-                isOperation: true
-            },
-            {
-                sid: 2,
-                name: '雪狐',
-                age: 10,
-                address: '陕西省西安市',
-                isShowInput: true,
-                creatTime: '2020-01-19 10:02:56',
-                isSelect: true,
-                editButtonText: '已打款',
-                deleteButtonText: '拒绝',
-                isOperation: true
-            },
-            {
-                sid: 3,
-                name: '雪狐151',
-                age: 6,
-                address: '陕西省西安市',
-                isShowInput: true,
-                creatTime: '2020-01-19 10:02:56',
-                isSelect: true,
-                editButtonText: '已打款',
-                deleteButtonText: '拒绝',
-                isOperation: true
-            },
-            {
-                sid: 4,
-                name: '雪狼',
-                age: 50,
-                address: '陕西省西安市',
-                isShowInput: true,
-                creatTime: '2020-01-19 10:02:56',
-                isSelect: true,
-                editButtonText: '已打款',
-                deleteButtonText: '拒绝',
-                isOperation: true
-            }
-        ];
+        this.searchPayList();
     }
 
-    editRefusePay ( id ): void {
+    editRefusePay ( item ): void {
         //拒绝打款理由
         const activeModal = this.modalService.open(RefuseRemarkComponent, {
             size: 'lg',
@@ -119,10 +98,10 @@ export class RefusePaymentComponent implements OnInit {
             backdrop: 'static',
             keyboard: false
         });
-        activeModal.componentInstance.id = id;
+        activeModal.componentInstance.data = item;
         activeModal.result.then(result => {
-            console.info('add', result);
             if ( result == 'success' ) {
+                this.searchPayList();
             }
             else {
                 return;
@@ -142,32 +121,37 @@ export class RefusePaymentComponent implements OnInit {
         activeModal.componentInstance.operating = 'delete';
         activeModal.componentInstance.text = '是否确定已打款?';
         activeModal.result.then(( data ) => {
-            if ( data != 'ok' ) {
-                /*this.http.delete(ServiceConfig.MAJOR_TASK + '/' + id, {}, ( res ) => {
-                 if ( res && res.status_code == 200 ) {
-                 this.toast.showToastr('success', '删除成功');
-                 this.getTaskList();
-                 }
-                 else {
-                 this.toast.showToastr('error', res.message);
-                 }
-                 });*/
+            if ( data === 'ok' ) {
+                this.http.post(ServiceConfig.AUDIT + '?id=' + id + '&status=2', {}, ( res ) => {
+                    if ( res.code === 10000) {
+                        this.searchPayList();
+                    }
+                    else {
+                        this.toastr.showToast('danger', '', res.message);
+                    }
+                });
             }
         });
     }
 
-    sortPayList ( $event ) {
+    sortPayList ( ) {
         //排序
-        console.info($event);
+        if (this.sortArg === 1){
+            this.sortArg = 2;
+        }
+        else {
+            this.sortArg = 1;
+        }
+        this.searchPayList();
     }
 
     selectAllPayData ( $event ): void {
         //全选
-        this.tableTitle[ 0 ].isChecked = $event;
-        if ( $event ) {
+        this.tableTitle[ 0 ].isChecked = $event.target.checked;
+        if ( $event.target.checked ) {
             this.signatureIdArr = [];
             this.tableList.forEach(item => {
-                this.signatureIdArr.push(item.sid);
+                this.signatureIdArr.push(item.id);
             })
         }
         else {
@@ -177,11 +161,11 @@ export class RefusePaymentComponent implements OnInit {
 
     selectPayOneData ( $event ): void {
         //单条筛选
-        if ( $event.checked ) {
-            this.signatureIdArr.push(Number($event.sid));
+        if ( $event.target.checked ) {
+            this.signatureIdArr.push(Number($event.target.id));
         }
         else {
-            let idx = this.signatureIdArr.indexOf(Number($event.sid));
+            let idx = this.signatureIdArr.indexOf(Number($event.target.id));
             this.signatureIdArr.splice(idx, 1);
         }
         this.tableTitle[ 0 ].isChecked = this.signatureIdArr.length === this.tableList.length ? true : false;
@@ -189,8 +173,35 @@ export class RefusePaymentComponent implements OnInit {
 
     searchPayList (): void {
         //搜索
-        console.info(123456);
-
+        let params = {
+            currPage: this.currPage,
+            pageSize: this.pageSize,
+            entity: {
+                name: this.payeeName,
+                phone: this.payeephone,
+                status: this.statusArr,
+                timeSort: this.sortArg
+            }
+        };
+        this.http.post(ServiceConfig.WITHDRAW, params, ( res ) => {
+            console.info(res);
+            if ( res.code === 10000 ) {
+                this.tableList = res.data.records;
+                this.totalCount = res.data.totalCount;
+                this.totalPage = Math.ceil(res.data.totalCount / this.pageSize);
+                this.tableList.forEach(item => {
+                    item.isShowInput = false;
+                    item.isSelect = true;
+                    item.isChecked = false;
+                    item.isOperation = true;
+                    item.refuseText = '拒绝';
+                    item.alreadyPaidText = '已打款';
+                })
+            }
+            else {
+                this.toastr.showToast('danger', '', res.message);
+            }
+        })
     }
 
     exportExcel (): void {
@@ -205,6 +216,11 @@ export class RefusePaymentComponent implements OnInit {
 
     batchPayment (): void {
         //批量打款
+    }
+
+    changePage ( $event ) {
+        this.currPage = $event;
+        this.searchPayList();
     }
 
 }

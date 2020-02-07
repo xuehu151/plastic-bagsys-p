@@ -21,9 +21,9 @@
                 <span class="row-name">当前角色</span>
                 <div class="row-input">
                     <div class="form-group">
-                        <select class="form-control" [(ngModel)]="data.roleName">
+                        <select class="form-control" [(ngModel)]="roleId">
                             <option value="" disabled>-请选择角色-</option>
-                            <option *ngFor="let role of roleList">
+                            <option *ngFor="let role of roleList" [value]="role.id">
                                 {{role.name}}
                             </option>
                         </select>

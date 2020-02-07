@@ -16,17 +16,19 @@ import { EditAgentComponent } from "../edit-agent/edit-agent.component";
 export class AgentComponent implements OnInit {
     tableTitle: Array<any> = [];
     tableList: Array<any> = [];
-    private proviceData: Array<any> = [];
-    private cityData: Array<any> = [];
-    private cityArray: Array<any> = [];
-    private agentName: string;
-    private agentTelephone: string;
-    private agentCompanyName: string;
-    private managerPhone: string;
-    private cityId: number;
-    private provinceId: number;
-    private currPage: number = 1;
-    private pageSize: number = 15;
+    proviceData: Array<any> = [];
+    cityData: Array<any> = [];
+    cityArray: Array<any> = [];
+    agentName: string;
+    agentTelephone: string;
+    agentCompanyName: string;
+    managerPhone: string;
+    cityId: number;
+    provinceId: number;
+    currPage: number = 1;
+    pageSize: number = 15;
+    totalCount: number = 0;
+    totalPage: number = 0;
 
 
     constructor ( private modalService: NgbModal,
@@ -125,6 +127,8 @@ export class AgentComponent implements OnInit {
             // console.info(res);
             if ( res.code === 10000 ) {
                 this.tableList = res.data.records;
+                this.totalCount = res.data.totalCount;
+                this.totalPage = Math.ceil(res.data.totalCount / this.pageSize);
                 this.tableList.forEach(item => {
                     item.isShowInput = false;
                     item.isSelect = true;
@@ -181,5 +185,10 @@ export class AgentComponent implements OnInit {
                 return;
             }
         });
+    }
+
+    changePage ( $event ) {
+        this.currPage = $event;
+        this.searchAgentList();
     }
 }

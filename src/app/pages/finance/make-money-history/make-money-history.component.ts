@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { Toastrervice } from "../../../providers/toastrService";
+import { HttpCustormClient } from '../../../providers/HttpClient'
+import { ServiceConfig } from '../../../providers/service.config';
 
 @Component ({
     selector: 'ngx-make-money-history',
@@ -11,9 +13,16 @@ import { Toastrervice } from "../../../providers/toastrService";
 export class MakeMoneyHistoryComponent implements OnInit {
     tableTitle: Array<any> = [];
     tableList: Array<any> = [];
-    signatureIdArr: Array<any> = [];
+    currPage: number = 1;
+    pageSize: number = 15;
+    totalCount: number = 0;
+    totalPage: number = 0;
+    payeeName: string;
+    payeephone: string;
+    sortArg: number = 2;
 
     constructor ( private router: Router,
+                  private http: HttpCustormClient,
                   private toastr: Toastrervice, ) {
     }
 
@@ -26,76 +35,103 @@ export class MakeMoneyHistoryComponent implements OnInit {
                 isShowInput: false
             },
             {
-                title: '用户姓名',
+                title: '代理商ID',
                 sortIcon: false,
                 isShowInput: true
             },
             {
-                title: '用户手机号',
+                title: '姓名',
                 sortIcon: false,
                 isShowInput: true
             },
             {
-                title: '当前角色',
+                title: '手机号',
                 sortIcon: false,
                 isShowInput: true
             },
             {
-                title: '创建时间',
+                title: '身份证号',
                 sortIcon: false,
                 isShowInput: true
             },
-        ];
-        this.tableList = [
             {
-                sid: 1,
-                name: '李强',
-                age: 30,
-                address: '西安市',
-                isShowInput: false,
-                creatTime: '2020-01-19 10:02:56',
-                isSelect: true,
-                editButtonText: '已打款',
-                deleteButtonText: '拒绝',
-                isOperation: false
+                title: '开户行',
+                sortIcon: false,
+                isShowInput: true
             },
             {
-                sid: 2,
-                name: '雪狐',
-                age: 10,
-                address: '陕西省西安市',
-                isShowInput: false,
-                creatTime: '2020-01-19 10:02:56',
-                isSelect: true,
-                editButtonText: '已打款',
-                deleteButtonText: '拒绝',
-                isOperation: false
+                title: '银行卡号',
+                sortIcon: false,
+                isShowInput: true
             },
             {
-                sid: 3,
-                name: '雪狐151',
-                age: 6,
-                address: '陕西省西安市',
-                isShowInput: false,
-                creatTime: '2020-01-19 10:02:56',
-                isSelect: true,
-                editButtonText: '已打款',
-                deleteButtonText: '拒绝',
-                isOperation: false
+                title: '申请金额',
+                sortIcon: false,
+                isShowInput: true
             },
             {
-                sid: 4,
-                name: '雪狼',
-                age: 50,
-                address: '陕西省西安市',
-                isShowInput: false,
-                creatTime: '2020-01-19 10:02:56',
-                isSelect: true,
-                editButtonText: '已打款',
-                deleteButtonText: '拒绝',
-                isOperation: false
+                title: '申请时间',
+                sortIcon: false,
+                isShowInput: true
+            },
+            {
+                title: '操作人',
+                sortIcon: false,
+                isShowInput: true
+            },
+            {
+                title: '操作时间',
+                sortIcon: false,
+                isShowInput: true
+            },
+            {
+                title: '操作结果',
+                sortIcon: false,
+                isShowInput: true
+            },
+            {
+                title: '拒绝理由',
+                sortIcon: false,
+                isShowInput: true
             }
         ];
+        this.searchPayHistoryList();
+    }
+
+    searchPayHistoryList (): void {
+        //搜索
+        let params = {
+            currPage: this.currPage,
+            pageSize: this.pageSize,
+            entity: {
+                name: this.payeeName,
+                phone: this.payeephone,
+                status: [ 2, 3 ],
+                timeSort: this.sortArg
+            }
+        };
+        this.http.post(ServiceConfig.WITHDRAW, params, ( res ) => {
+            console.info(res);
+            if ( res.code === 10000 ) {
+                this.tableList = res.data.records;
+                this.totalCount = res.data.totalCount;
+                this.totalPage = Math.ceil(res.data.totalCount / this.pageSize);
+                this.tableList.forEach(item => {
+                    item.isShowInput = false;
+                    item.isSelect = true;
+                    item.isOperation = true;
+                    item.refuseText = '拒绝';
+                    item.alreadyPaidText = '已打款';
+                })
+            }
+            else {
+                this.toastr.showToast('danger', '', res.message);
+            }
+        })
+    }
+
+    exportPayHistoryExcel(): void{
+
     }
 
 }

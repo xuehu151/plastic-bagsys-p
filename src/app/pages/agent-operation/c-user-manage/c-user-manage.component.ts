@@ -12,11 +12,13 @@ import { ServiceConfig } from '../../../providers/service.config';
 export class CUserManageComponent implements OnInit {
     tableTitle: Array<any> = [];
     tableList: Array<any> = [];
-    private memNum: string;
-    private nickname: string;
-    private currPage: number = 1;
-    private pageSize: number = 15;
-    private headImg: string = '../../../../assets/images/user.svg';
+    memNum: string;
+    nickname: string;
+    currPage: number = 1;
+    pageSize: number = 15;
+    totalCount: number = 0;
+    totalPage: number = 0;
+    headImg: string = '../../../../assets/images/user.svg';
 
     constructor ( private http: HttpCustormClient,
                   private toastr: Toastrervice, ) {
@@ -73,6 +75,8 @@ export class CUserManageComponent implements OnInit {
             // console.info(res);
             if ( res.code === 10000 ) {
                 this.tableList = res.data.records;
+                this.totalCount = res.data.totalCount;
+                this.totalPage = Math.ceil(res.data.totalCount / this.pageSize);
                 this.tableList.forEach(item => {
                     item.isShowInput = false;
                     item.isSelect = true;
@@ -86,6 +90,11 @@ export class CUserManageComponent implements OnInit {
 
     exportCUserExcel (): void {
 
+    }
+
+    changePage ( $event ) {
+        this.currPage = $event;
+        this.searchCUserList();
     }
 
 }

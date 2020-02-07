@@ -13,9 +13,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 export class EditRoleComponent implements OnInit {
     @Input() item:any;
-    private roleName: string;
-    private auth: string;
-    private roleId: number = 0;
 
     constructor ( private http: HttpCustormClient,
                   private activeModal: NgbActiveModal,

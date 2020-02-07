@@ -37,6 +37,13 @@ export class ServiceConfig {
     public static FINDAGENT = 'biz/agent/infoByDefault';
     //会员管理接口
     public static MEMBER = 'sys/member/findPage';
-
-
+    //采购
+    public static PURCHASE = 'biz/order/purchase/findPage';
+    //扫描
+    public static SCANORDER = 'biz/order/scan/findPage';
+    //编辑运单号
+    public static TRACKNUM = 'biz/order/purchase/update/trackNum';
+    //打款
+    public static WITHDRAW = 'biz/withdraw/findPage';
+    public static AUDIT = 'biz/withdraw/audit';
 }

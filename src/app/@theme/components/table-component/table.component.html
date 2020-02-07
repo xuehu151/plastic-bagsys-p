@@ -37,7 +37,7 @@
                 </td>
                 <td>{{item.name}}</td>
                 <td>{{item.phone}}</td>
-                <td>{{item.roleName | roleNamePipe}}</td>
+                <td>{{item.roleName}}</td>
                 <td>{{item.createTime}}</td>
                 <td  class="operator" *ngIf="item.isOperation">
                     <span (click)="startEdit(item)" *ngIf="item.editBtn">

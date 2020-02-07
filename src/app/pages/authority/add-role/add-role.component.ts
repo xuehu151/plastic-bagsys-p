@@ -11,9 +11,9 @@ import { Router } from '@angular/router';
 })
 
 export class AddRoleComponent implements OnInit {
-    private roleName: string;
-    private auth: string;
-    private roleId: number = 0;
+    roleName: string;
+    auth: boolean;
+    roleId: number = 0;
 
     constructor ( private http: HttpCustormClient,
                   private router: Router,

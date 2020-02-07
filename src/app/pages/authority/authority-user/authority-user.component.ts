@@ -20,11 +20,12 @@ export class AuthorityUserComponent implements OnInit {
     signatureIdArr: Array<any> = [];
     currPage: number = 1;
     pageSize: number = 15;
-    private username: string;
-    private userTelephone: string;
-    private userRole: string = '';
-    private roleId;
-    private roleList: Array<any> = [];
+    totalCount: number = 0;
+    totalPage: number = 0;
+    username: string;
+    userTelephone: string;
+    roleId: string = '';
+    roleList: Array<any> = [];
 
     constructor ( private modalService: NgbModal,
                   private http: HttpCustormClient,
@@ -68,25 +69,11 @@ export class AuthorityUserComponent implements OnInit {
                 isShowInput: true
             }
         ];
-        // this.tableList = [
-        //     {
-        //         sid: 1,
-        //         name: '李强',
-        //         age: 30,
-        //         address: '西安市',
-        //         isShowInput: true,
-        //         creatTime: '2020-01-19 10:02:56',
-        //         isSelect: true,
-        //         editButtonText: '修改',
-        //         deleteButtonText: '删除',
-        //         isOperation: true
-        //     },
-        // ];
     }
 
     getRoleList(): void{
         this.http.get(ServiceConfig.ROLELIST, ( res ) => {
-            // console.info(res);
+            console.info(res);
             if ( res.code === 10000 ) {
                 this.roleList = res.data;
             }
@@ -109,6 +96,8 @@ export class AuthorityUserComponent implements OnInit {
         this.http.post(ServiceConfig.USER, params, ( res ) => {
             // console.info(res);
             if ( res.code === 10000 ) {
+                this.totalCount = res.data.totalCount;
+                this.totalPage = Math.ceil(res.data.totalCount / this.pageSize);
                 this.tableList = res.data.records;
                 this.tableList.forEach( item => {
                     item.isShowInput = false;
@@ -190,5 +179,9 @@ export class AuthorityUserComponent implements OnInit {
         });
     }
 
+    changePage ( $event ) {
+        this.currPage = $event;
+        this.searchUser();
+    }
 
 }

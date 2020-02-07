@@ -13,25 +13,24 @@ import { ServiceConfig } from '../../../providers/service.config';
 })
 
 export class AddDeviceComponent implements OnInit {
-    private deviceName: string;
-    private deviceCode: string;
-    private phone: string;
-    private holderName: string;
-    private goodsId: number = 0;
-    private price: number = 0;
-    private cost: number = 0;
-    private profitPercent: number = 0.1000;
-    private address: string;
-    private provinceId: number;
-    private cityId: number = 0;
-    private userId: number;
-    private goodsList: Array<any> = [];
-
-    private cityData: Array<any> = [];
-    private cityArray: Array<any> = [];
-    private proviceData: Array<any> = [];
-    private provinceName: string = '';
-    private cityName: string = '';
+    deviceName: string;
+    deviceCode: string;
+    phone: string;
+    holderName: string;
+    goodsId: number = 0;
+    price: number = 0;
+    cost: number = 0;
+    profitPercent: number = 0.1000;
+    address: string;
+    provinceId: number;
+    cityId: number = 0;
+    userId: number;
+    goodsList: Array<any> = [];
+    cityData: Array<any> = [];
+    cityArray: Array<any> = [];
+    proviceData: Array<any> = [];
+    provinceName: string = '';
+    cityName: string = '';
 
     constructor ( private activeModal: NgbActiveModal,
                   private areaDataService: AreaDataService,
@@ -72,8 +71,8 @@ export class AddDeviceComponent implements OnInit {
     }
 
     /*
-    *
-      agentId: "D00000001"
+     *
+     agentId: "D00000001"
      areaGroup: "河北省秦皇岛市"
      compName: "机器猫"
      deviceCount: null
@@ -84,9 +83,9 @@ export class AddDeviceComponent implements OnInit {
      phone: "13072923459"
      userId: 7
 
-    * */
+     * */
 
-    findAgent(): void{
+    findAgent (): void {
         this.http.get(ServiceConfig.FINDAGENT, ( res ) => {
             console.info(res);
             if ( res.code === 10000 ) {
@@ -136,7 +135,7 @@ export class AddDeviceComponent implements OnInit {
             this.toastr.showToast('danger', '', '输入设备名称!');
             return false;
         }
-        else if(this.trimService.trim(this.deviceCode).length < 11){
+        else if ( this.trimService.trim(this.deviceCode).length < 11 ) {
             this.toastr.showToast('danger', '', '输入合法的设备编号!');
             return false;
         }
@@ -144,7 +143,7 @@ export class AddDeviceComponent implements OnInit {
             this.toastr.showToast('danger', '', '请添加商品!');
             return false;
         }
-        else if ( this.floatNumberService.floatNumber(this.profitPercent) > 1) {
+        else if ( this.floatNumberService.floatNumber(this.profitPercent) > 1 ) {
             this.toastr.showToast('danger', '', '分润比例必须是小于或等于1的值!');
             return false;
         }

@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NbSidebarService } from '@nebular/theme';
-import { LayoutService } from '../../../@core/utils';
 import { ConfigService } from "../../../providers/configService";
 import { Router } from "@angular/router";
 import { HttpCustormClient } from '../../../providers/HttpClient';
@@ -16,14 +15,13 @@ import { Toastrervice } from "../../../providers/toastrService";
 export class HeaderComponent implements OnInit {
     @Input () position = 'normal';
     configInfo: Object;
-    private userInfo: any;
+    userInfo: any;
 
     constructor ( private configService: ConfigService,
                   private router: Router,
                   private http: HttpCustormClient,
                   private sidebarService: NbSidebarService,
-                  private toastr: Toastrervice,
-                  private layoutService: LayoutService ) {
+                  private toastr: Toastrervice,) {
     }
 
     ngOnInit () {
@@ -33,7 +31,6 @@ export class HeaderComponent implements OnInit {
 
     toggleSidebar (): boolean {
         this.sidebarService.toggle (true, 'menu-sidebar');
-        this.layoutService.changeLayoutSize ();
         return false;
     }
 

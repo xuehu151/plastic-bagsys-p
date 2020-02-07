@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ServiceConfig } from '../../../providers/service.config';
+import { HttpCustormClient } from '../../../providers/HttpClient'
 
 @Component({
     selector: 'ngx-refuseRemark',
@@ -17,10 +19,11 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class RefuseRemarkComponent implements OnInit {
-    @Input() id: number;
-    private refuseRemark: string;
+    @Input() data: any;
+    remarks: string;
 
-    constructor ( private activeModal: NgbActiveModal, ) {
+    constructor ( private activeModal: NgbActiveModal,
+                  private http: HttpCustormClient, ) {
     }
 
     ngOnInit () {
@@ -31,8 +34,11 @@ export class RefuseRemarkComponent implements OnInit {
     }
 
     sure (): void {
-        this.activeModal.close();
-
+        this.http.post(ServiceConfig.AUDIT + '?id=' + this.data.id + '&status=3&remarks=' + this.remarks, {}, ( res ) => {
+            if(res.code === 10000){
+                this.activeModal.close('success');
+            }
+        })
     }
 
 }
