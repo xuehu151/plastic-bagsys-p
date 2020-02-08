@@ -70,24 +70,9 @@ export class AddDeviceComponent implements OnInit {
         })
     }
 
-    /*
-     *
-     agentId: "D00000001"
-     areaGroup: "河北省秦皇岛市"
-     compName: "机器猫"
-     deviceCount: null
-     id: 1
-     level: 2
-     managerPhone: "13072923444"
-     name: "机器猫"
-     phone: "13072923459"
-     userId: 7
-
-     * */
-
     findAgent (): void {
         this.http.get(ServiceConfig.FINDAGENT, ( res ) => {
-            console.info(res);
+            // console.info(res);
             if ( res.code === 10000 ) {
                 this.phone = res.data.phone;
                 this.holderName = res.data.name;
