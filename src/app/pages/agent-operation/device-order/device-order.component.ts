@@ -20,7 +20,7 @@ export class DeviceOrderComponent implements OnInit {
     deviceId: number;
     status: string = '';
     currPage: number = 1;
-    pageSize: number = 15;
+    pageSize: number = 10;
     totalCount: number = 0;
     totalPage: number = 0;
 
@@ -129,6 +129,11 @@ export class DeviceOrderComponent implements OnInit {
 
     exportDeviceExcel(): void{
 
+    }
+
+    changePage ( $event ) {
+        this.currPage = $event;
+        this.searchDeviceOrderList();
     }
 
 }

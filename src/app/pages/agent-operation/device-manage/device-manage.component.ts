@@ -3,6 +3,7 @@ import { Toastrervice } from "../../../providers/toastrService";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { AddDeviceComponent } from "../add-deviced/add-device.component";
 import { EditDeviceComponent } from "../edit-deviced/edit-device.component";
+import { QRcodeModalComponent } from "../QRcode/QRcode.component";
 import { HttpCustormClient } from '../../../providers/HttpClient'
 import { AreaDataService, TrimService } from '../../../providers/areaDataService';
 import { ServiceConfig } from '../../../providers/service.config';
@@ -29,7 +30,7 @@ export class DeviceManageComponent implements OnInit {
     provinceId: string = '';
     cityId: string = '';
     currPage: number = 1;
-    pageSize: number = 15;
+    pageSize: number = 10;
     totalCount: number = 0;
     totalPage: number = 0;
     runStatus: number = 1;
@@ -162,7 +163,7 @@ export class DeviceManageComponent implements OnInit {
             },
         };
         this.http.post(ServiceConfig.DEVICELIST, params, ( res ) => {
-            console.info(res);
+            // console.info(res);
             if ( res.code === 10000 ) {
                 this.tableList = res.data.records;
                 this.totalCount = res.data.totalCount;
@@ -171,6 +172,7 @@ export class DeviceManageComponent implements OnInit {
                     item.isShowInput = false;
                     item.isSelect = true;
                     item.editButtonText = '修改';
+                    item.QRcodeText = '二维码';
                     item.isOperation = true;
                     item.name = item.name ? item.name : '- - -';
                 })
@@ -185,6 +187,24 @@ export class DeviceManageComponent implements OnInit {
     exportDeviceExcel (): void {
         //导出
         console.info('导出')
+    }
+
+    QRcode(item):void{
+        const activeModal = this.modalService.open(QRcodeModalComponent, {
+            size: 'lg',
+            windowClass: 'lg-4-modal',
+            container: 'nb-layout',
+            backdrop: 'static',
+            keyboard: false
+        });
+        activeModal.componentInstance.data = item;
+        activeModal.result.then(result => {
+            if ( result == 'success' ) {
+            }
+            else {
+                return;
+            }
+        });
     }
 
     addDevice(): void{

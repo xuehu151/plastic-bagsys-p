@@ -23,7 +23,7 @@ export class OrderListHistoryComponent implements OnInit {
     applyDate: string;
     issuanceDate: string;
     currPage: number = 1;
-    pageSize: number = 15;
+    pageSize: number = 10;
     totalCount: number = 0;
     totalPage: number = 0;
 

@@ -23,7 +23,7 @@ export class OrderListComponent implements OnInit {
     status: number = 0;
     applyDate: string;
     currPage: number = 1;
-    pageSize: number = 15;
+    pageSize: number = 10;
     totalCount: number = 0;
     totalPage: number = 0;
 

@@ -28,7 +28,6 @@
     }
 }
 
-
 .header-btn {
     display: inline-flex;
     justify-content: flex-end;
@@ -79,8 +78,20 @@
 }
 
 .operator{
-    width: 6rem;
+    width: 9rem!important;
     display: flex;
     justify-content: flex-start;
-    padding: .75rem 2px;
+    padding: .75rem 1px;
+    span{
+        padding: 1px 4px;
+        color: white;
+        cursor: pointer;
+        font-size: .8rem;
+        text-align: center;
+        display: inline-block;
+        border-radius: 2px;
+        background-color: #409eff;
+        border-color: #409eff;
+        margin: 0 1px;
+    }
 }

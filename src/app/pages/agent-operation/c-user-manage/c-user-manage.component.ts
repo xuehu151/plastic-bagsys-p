@@ -15,7 +15,7 @@ export class CUserManageComponent implements OnInit {
     memNum: string;
     nickname: string;
     currPage: number = 1;
-    pageSize: number = 15;
+    pageSize: number = 10;
     totalCount: number = 0;
     totalPage: number = 0;
     headImg: string = '../../../../assets/images/user.svg';

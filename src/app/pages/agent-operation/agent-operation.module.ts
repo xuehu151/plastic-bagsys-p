@@ -5,12 +5,14 @@ import { AddAgentsComponent } from "./new-agents/new-agents.component";
 import { AddDeviceComponent } from "./add-deviced/add-device.component";
 import { EditAgentComponent } from "./edit-agent/edit-agent.component";
 import { EditDeviceComponent } from "./edit-deviced/edit-device.component";
+import { QRcodeModalComponent } from "./QRcode/QRcode.component";
 
 const components = [
     AddAgentsComponent,
     AddDeviceComponent,
     EditDeviceComponent,
     EditAgentComponent,
+    QRcodeModalComponent,
 ];
 
 @NgModule({

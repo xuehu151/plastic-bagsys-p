@@ -184,6 +184,26 @@ input[type="checkbox"]:after {
     }
 }
 
+.lg-4-modal{
+    width: 100%;
+    .modal-lg {
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .modal-content {
+            width: 35%;
+            min-width: 35rem;
+            border-radius: 3px;
+            nb-card{
+                margin-bottom: 0!important;
+            }
+        }
+    }
+}
+
 .midModal {
     width: 100%;
     .modal-lg {
@@ -332,13 +352,16 @@ input[type="checkbox"]:after {
     .operator{
         width: 8rem;
         span{
-            padding: 1px 8px;
+            padding: 1px 6px;
             color: white;
             cursor: pointer;
             font-size: .8rem;
             text-align: center;
             display: inline-block;
             border-radius: 2px;
+            background-color: #409eff;
+            border-color: #409eff;
+            margin: 0 1px;
         }
         span:first-child{
             background-color: #67c23a;
