@@ -26,6 +26,10 @@ export class OrderListHistoryComponent implements OnInit {
     pageSize: number = 10;
     totalCount: number = 0;
     totalPage: number = 0;
+    startCreateTime: string;
+    endCreateTime: string;
+    startHandleTime: string;
+    endHandleTime: string;
 
     constructor ( private areaDataService: AreaDataService,
                   private http: HttpCustormClient,
@@ -111,6 +115,8 @@ export class OrderListHistoryComponent implements OnInit {
     }
 
     searchOrderHistoryList(): void{
+        this.startCreateTime = this.applyDate && this.applyDate['year'] + '-' + this.applyDate['month'] + '-' + this.applyDate['day'] + ' 00:00:00';
+        this.startHandleTime = this.issuanceDate && this.issuanceDate['year'] + '-' + this.issuanceDate['month'] + '-' + this.issuanceDate['day'] + ' 00:00:00';
         let params = {
             currPage: this.currPage,
             pageSize: this.pageSize,
@@ -120,11 +126,15 @@ export class OrderListHistoryComponent implements OnInit {
                 signeeMobile: this.signeeMobile,
                 status: this.status,
                 handleUserName: this.handleUserName,
-                trackNum: this.trackNum
+                trackNum: this.trackNum,
+                startCreateTime: this.startCreateTime,
+                endCreateTime: this.endCreateTime,
+                startHandleTime	: this.startHandleTime	,
+                endHandleTime: this.endHandleTime
             }
         };
         this.http.post(ServiceConfig.PURCHASE, params, ( res ) => {
-            console.info(res);
+            // console.info(res);
             if ( res.code === 10000 ) {
                 this.tableList = res.data.records;
                 this.totalCount = res.data.totalCount;

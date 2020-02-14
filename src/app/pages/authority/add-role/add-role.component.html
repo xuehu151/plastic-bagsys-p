@@ -20,77 +20,98 @@
                     <div class="role-panel">
                         <span class="row-name auth-choose">权限选择</span>
                         <div class="row-list-panel">
-                            <div class="row row-item">
+                            <div class="row row-item" *ngFor="let role of roleArray;let i=index">
                                 <div class="row-name">
-                                    权限管理
-                                    <input type="checkbox" [(ngModel)]="auth" class="check-box">
+                                    <label for="authority{{i}}">{{role.name}}</label>
+                                    <input type="checkbox"
+                                           id=authority{{i}}
+                                           [checked]=role.isShow
+                                           (change)="selectRole($event, role)"
+                                           class="check-box">
+                                </div>
+                                <div class="row-list-box">
+                                    <div class="row-checkbox" *ngFor="let roleCh of role.children">
+                                        <label>{{roleCh.name}}</label>
+                                        <input type="checkbox"
+                                               [checked]=role.isShow
+                                               id="{{role.resourceKey}}"
+                                               (change)="selectRoleItem($event, roleCh, role)"
+                                               class="check-box">
+                                    </div>
+                                    <!--<div class="row-checkbox">
+                                        <label for="add-role">角色新增</label>
+                                        <input type="checkbox" id="add-role" class="check-box">
+                                    </div>
+                                    <div class="row-checkbox">
+                                        <label for="add-user">用户新增</label>
+                                        <input type="checkbox" id="add-user" class="check-box">
+                                    </div>-->
+                                </div>
+                            </div>
+                           <!-- <div class="row row-item">
+                                <div class="row-name">
+                                    <label for="finance-manage">财务管理</label>
+                                    <input type="checkbox" id="finance-manage" class="check-box">
                                 </div>
                                 <div class="row-list-box">
                                     <div class="row-checkbox">
-                                        角色 <input type="checkbox" class="check-box">
+                                        <label for="make-money">打款</label>
+                                        <input type="checkbox" id="make-money" class="check-box">
                                     </div>
                                     <div class="row-checkbox">
-                                        用户 <input type="checkbox"  class="check-box">
-                                    </div>
-                                    <div class="row-checkbox">
-                                        角色新增 <input type="checkbox"  class="check-box">
-                                    </div>
-                                    <div class="row-checkbox">
-                                        用户新增 <input type="checkbox"  class="check-box">
+                                        <label for="make-money-history">打款历史</label>
+                                        <input type="checkbox" id="make-money-history" class="check-box">
                                     </div>
                                 </div>
                             </div>
                             <div class="row row-item">
                                 <div class="row-name">
-                                    财务管理 <input type="checkbox"  class="check-box">
+                                    <label for="operation-manage">运营管理</label>
+                                    <input type="checkbox" id="operation-manage" class="check-box">
                                 </div>
                                 <div class="row-list-box">
                                     <div class="row-checkbox">
-                                        打款 <input type="checkbox"  class="check-box">
+                                        <label for="agent-manage">代理商管理</label>
+                                        <input type="checkbox" id="agent-manage" class="check-box">
                                     </div>
                                     <div class="row-checkbox">
-                                        打款历史 <input type="checkbox"  class="check-box">
+                                        <label for="device-manage">设备管理</label>
+                                        <input type="checkbox" id="device-manage" class="check-box">
                                     </div>
+                                    <div class="row-checkbox">
+                                        <label for="c-client">C端用户管理</label>
+                                        <input type="checkbox" id="c-client" class="check-box">
+                                    </div>
+                                    <div class="row-checkbox">
+                                        <label for="order">订单</label>
+                                        <input type="checkbox" id="order" class="check-box">
+                                    </div>
+                                    &lt;!&ndash;<div class="row-checkbox">&ndash;&gt;
+                                        &lt;!&ndash;<label for="add-agent">新增代理商</label>&ndash;&gt;
+                                        &lt;!&ndash;<input type="checkbox" id="add-agent" class="check-box">&ndash;&gt;
+                                    &lt;!&ndash;</div>&ndash;&gt;
+                                    &lt;!&ndash;<div class="row-checkbox">&ndash;&gt;
+                                        &lt;!&ndash;<label for="add-device">新增设备</label>&ndash;&gt;
+                                        &lt;!&ndash;<input type="checkbox" id="add-device" class="check-box">&ndash;&gt;
+                                    &lt;!&ndash;</div>&ndash;&gt;
                                 </div>
                             </div>
                             <div class="row row-item">
                                 <div class="row-name">
-                                    运营管理 <input type="checkbox"  class="check-box">
+                                    <label for="purchase-order">采购订单管理</label>
+                                    <input type="checkbox" id="purchase-order" class="check-box">
                                 </div>
                                 <div class="row-list-box">
                                     <div class="row-checkbox">
-                                        代理商管理 <input type="checkbox"  class="check-box">
+                                        <label for="order-info">订单信息</label>
+                                        <input type="checkbox" id="order-info" class="check-box">
                                     </div>
                                     <div class="row-checkbox">
-                                        设备管理 <input type="checkbox"  class="check-box">
-                                    </div>
-                                    <div class="row-checkbox">
-                                        C端用户管理 <input type="checkbox"  class="check-box">
-                                    </div>
-                                    <div class="row-checkbox">
-                                        订单 <input type="checkbox"  class="check-box">
-                                    </div>
-                                    <div class="row-checkbox">
-                                        新增代理商 <input type="checkbox"  class="check-box">
-                                    </div>
-                                    <div class="row-checkbox">
-                                        新增设备 <input type="checkbox"  class="check-box">
+                                        <label for="order-history">订单历史</label>
+                                        <input type="checkbox" id="order-history" class="check-box">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row row-item">
-                                <div class="row-name">
-                                    采购订单管理 <input type="checkbox"  class="check-box">
-                                </div>
-                                <div class="row-list-box">
-                                    <div class="row-checkbox">
-                                        订单信息 <input type="checkbox"  class="check-box">
-                                    </div>
-                                    <div class="row-checkbox">
-                                        订单历史 <input type="checkbox"  class="check-box">
-                                    </div>
-                                </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>

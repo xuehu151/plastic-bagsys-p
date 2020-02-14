@@ -12,6 +12,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class EditRoleComponent implements OnInit {
+    roleList: Array<any> = [];
     @Input() item:any;
 
     constructor ( private http: HttpCustormClient,
@@ -21,6 +22,19 @@ export class EditRoleComponent implements OnInit {
     }
 
     ngOnInit () {
+    }
+
+    getRoleList(): void{
+        this.http.post(ServiceConfig.MENULIST, {}, ( res ) => {
+            console.info(res);
+            if ( res.code === 10000 ) {
+                this.roleList = res.data;
+                for (let role of this.roleList){}
+            }
+            else {
+                this.toastr.showToast('danger', '', res.message);
+            }
+        })
     }
 
     suer (): any {

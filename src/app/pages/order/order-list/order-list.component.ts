@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Toastrervice } from "../../../providers/toastrService";
 import { HttpCustormClient } from '../../../providers/HttpClient'
@@ -21,11 +21,14 @@ export class OrderListComponent implements OnInit {
     orderStatus: string = '';
     goodsId: string = '';
     status: number = 0;
-    applyDate: string;
+    startApplyDate: string;
+    endApplyDate: string;
     currPage: number = 1;
     pageSize: number = 10;
     totalCount: number = 0;
     totalPage: number = 0;
+    startCreateTime: string;
+    endCreateTime: string;
 
     constructor ( private areaDataService: AreaDataService,
                   private modalService: NgbModal,
@@ -98,6 +101,9 @@ export class OrderListComponent implements OnInit {
     }
 
     searchOrderList (): void {
+        console.info(this.startApplyDate);
+        this.startCreateTime = this.startApplyDate && this.startApplyDate['year'] + '-' + this.startApplyDate['month'] + '-' + this.startApplyDate['day'] + ' 00:00:00';
+        // this.endCreateTime = this.endApplyDate && this.endApplyDate['year'] + '-' + this.endApplyDate['month'] + '-' + this.endApplyDate['day'] + '00:00:00';
         let params = {
             currPage: this.currPage,
             pageSize: this.pageSize,
@@ -105,11 +111,13 @@ export class OrderListComponent implements OnInit {
                 consignee: this.consignee,
                 signeeMobile: this.signeeMobile,
                 status: this.orderStatus,
-                goodsId: this.goodsId
+                goodsId: this.goodsId,
+                startCreateTime: this.startCreateTime,
+                endCreateTime: this.endCreateTime
             }
         };
         this.http.post(ServiceConfig.PURCHASE, params, ( res ) => {
-            console.info(res);
+            // console.info(res);
             if ( res.code === 10000 ) {
                 this.tableList = res.data.records;
                 this.totalCount = res.data.totalCount;

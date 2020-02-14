@@ -17,6 +17,8 @@ export class LoginComponent implements AfterViewInit, OnInit {
     password: string = '923459';
     configInfo: Object;
     errInfo: string = '';
+    loading: boolean = false;
+    loadingText: string = '正在登录...';
 
     constructor ( private http: HttpCustormClient,
                   private configService: ConfigService,
@@ -40,10 +42,12 @@ export class LoginComponent implements AfterViewInit, OnInit {
 
     // 提交登录
     loginSubmit () {
+        this.loading = true;
         this.http.post(ServiceConfig.LOGIN, {
             username: this.username,
             password: this.password
         }, ( res ) => {
+            this.loading = false;
             if ( res.code === 10000 ) {
                 this.router.navigate([ '/pages/authority/authority-user' ]);
                 localStorage.setItem('isLogin', 'true');
@@ -52,7 +56,10 @@ export class LoginComponent implements AfterViewInit, OnInit {
             else {
                 this.errInfo = res.message;
             }
-        })
+        });
+        setTimeout(() => {
+            this.loading = false;
+        },5000)
     }
 
     // enter按键事件

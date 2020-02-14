@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 })
 
 export class AddRoleComponent implements OnInit {
+    roleArray: Array<any> = [];
+    roleList: Array<any> = [];
+    signatureIdArr: Array<any> = [];
     roleName: string;
     auth: boolean;
     roleId: number = 0;
@@ -21,9 +24,116 @@ export class AddRoleComponent implements OnInit {
     }
 
     ngOnInit () {
+        this.roleArray = [
+            {
+                name: '权限管理',
+                resourceKey: '1',
+                isShow: false,
+                children: [
+                    {
+                        name: '角色',
+                        resourceKey: '1001',
+                        isShow: false,
+                    },
+                    {
+                        name: '用户',
+                        resourceKey: '1002',
+                        isShow: false,
+                    },
+                ]
+            },
+            {
+                name: '财务管理',
+                resourceKey: '2',
+                isShow: false,
+                children: [
+                    {
+                        name: '打款',
+                        resourceKey: '2001',
+                        isShow: false,
+                    },
+                    {
+                        name: '打款历史',
+                        resourceKey: '2002',
+                        isShow: false,
+                    },
+                ]
+            },
+            {
+                name: '运营管理',
+                resourceKey: '3',
+                isShow: false,
+                children: [
+                    {
+                        name: '代理商管理',
+                        resourceKey: '3001',
+                        isShow: false,
+                    },
+                    {
+                        name: '设备管理',
+                        resourceKey: '3002',
+                        isShow: false,
+                    },
+                    {
+                        name: 'C端用户管理',
+                        resourceKey: '3003',
+                        isShow: false,
+                    },
+                    {
+                        name: '订单',
+                        resourceKey: '3004',
+                        isShow: false,
+                    },
+                ]
+            },
+            {
+                name: '采购订单管理',
+                resourceKey: '4',
+                isShow: false,
+                children: [
+                    {
+                        name: '订单信息',
+                        resourceKey: '4001',
+                        isShow: false,
+                    },
+                    {
+                        name: '订单历史',
+                        resourceKey: '4002',
+                        isShow: false,
+                    }
+                ]
+            },
+        ];
+    }
+
+    selectRole($event, item): void{
+        item.isShow = $event.target.checked;
+        if ( $event.target.checked ) {
+            this.signatureIdArr = [];
+            this.roleArray.forEach(item => {
+                this.signatureIdArr.push(item.resourceKey);
+            })
+        }
+        else {
+            this.signatureIdArr = [];
+        }
+    }
+
+    selectRoleItem($event, roleCh, role): void{
+        // roleCh.isShow = $event.target.checked;
+        //单条筛选
+        if ( $event.target.checked ) {
+            this.signatureIdArr.push(Number($event.target.resourceKey));
+        }
+        else {
+            let idx = this.signatureIdArr.indexOf(Number($event.target.resourceKey));
+            this.signatureIdArr.splice(idx, 1);
+        }
+        role.isShow = this.signatureIdArr.length === this.roleArray.length ? true : false;
     }
 
     addRole (): any {
+        console.info(this.roleArray)
         let params = {
             name: this.roleName,
             funcIds: []

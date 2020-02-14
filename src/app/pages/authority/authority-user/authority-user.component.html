@@ -65,13 +65,19 @@
             (operateItem) = "deleteItem($event)"></ng-table>
     </nb-card-body>
     <nb-card-footer>
-        <ng-page
-            *ngIf="tableList != null && tableList.length"
-            [totalPage]="totalPage"
-            (changePage)="changePage($event)"
-            [(page)]="currPage"
-            [pageSize]="pageSize"
-            [collectionSize]="totalCount"
-            [maxSize]="5"></ng-page>
+        <div class="pageInfo">
+            <div *ngIf="tableList != null || tableList.length !== 0" class="pageNumber">
+                共<span>{{totalCount}}</span>条数据
+                第<span>{{currPage}}/{{totalPage}}</span>页
+            </div>
+            <ng-page
+                *ngIf="tableList != null && tableList.length"
+                [totalPage]="totalPage"
+                (changePage)="changePage($event)"
+                [(page)]="currPage"
+                [pageSize]="pageSize"
+                [collectionSize]="totalCount"
+                [maxSize]="5"></ng-page>
+        </div>
     </nb-card-footer>
 </nb-card>

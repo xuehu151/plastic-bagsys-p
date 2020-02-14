@@ -73,7 +73,7 @@ export class AuthorityUserComponent implements OnInit {
 
     getRoleList(): void{
         this.http.get(ServiceConfig.ROLELIST, ( res ) => {
-            console.info(res);
+            // console.info(res);
             if ( res.code === 10000 ) {
                 this.roleList = res.data;
             }
