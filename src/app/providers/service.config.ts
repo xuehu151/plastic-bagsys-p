@@ -46,4 +46,6 @@ export class ServiceConfig {
     //打款
     public static WITHDRAW = 'biz/withdraw/findPage';
     public static AUDIT = 'biz/withdraw/audit';
+    //生成二维码
+    public static CREATQRCODE = 'biz/device/createQRCode';
 }

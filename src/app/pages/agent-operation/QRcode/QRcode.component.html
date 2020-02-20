@@ -1,12 +1,16 @@
 <nb-card>
-     <nb-card-body>
-         <i class="nb-close" (click)="closeModal()"></i>
-         <div class="qrcode">
-            <img src="./././././assets/images/dialogBlue.svg">
+    <nb-card-body>
+        <i class="nb-close" (click)="closeModal()"></i>
+        <div class="qrcode">
+            <span *ngIf="!imgUrl">用户未生成二维码点击按钮生成</span>
+            <img [src]="imgUrl" *ngIf="imgUrl" (click)="downQRcode()">
+            <b *ngIf="imgUrl">点击图片下载</b>
         </div>
-         <div class="qrcode-btn">
-             <span (click)="updateQrcode()">更新二维码</span>
-         </div>
-     </nb-card-body>
+        <div class="qrcode-btn">
+             <span (click)="updateQrcode()">
+                {{imgUrl ? '更新二维码' : '生成二维码'}}
+             </span>
+        </div>
+    </nb-card-body>
 
 </nb-card>
