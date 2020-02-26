@@ -16,8 +16,8 @@ export class DeviceOrderComponent implements OnInit {
     transactionNo: string;
     agentName: string;
     address: string;
-    memberId: number;
-    deviceId: number;
+    memberNum: number;
+    deviceCode: number;
     status: string = '';
     currPage: number = 1;
     pageSize: number = 10;
@@ -48,7 +48,7 @@ export class DeviceOrderComponent implements OnInit {
                 isShowInput: true
             },
             {
-                title: '设备ID',
+                title: '设备编号',
                 sortIcon: false,
                 isShowInput: true
             },
@@ -73,7 +73,7 @@ export class DeviceOrderComponent implements OnInit {
                 isShowInput: true
             },
             {
-                title: '购买用户ID',
+                title: '购买用户编号',
                 sortIcon: false,
                 isShowInput: true
             },
@@ -103,8 +103,8 @@ export class DeviceOrderComponent implements OnInit {
             entity: {
                 address: this.address,
                 agentName: this.agentName,
-                deviceId: this.deviceId,
-                memberId: this.memberId,
+                deviceCode: this.deviceCode,
+                memberNum: this.memberNum,
                 sn: this.sn,
                 status: this.status,
                 transactionNo: this.transactionNo

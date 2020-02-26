@@ -40,7 +40,7 @@ export class MakeMoneyHistoryComponent implements OnInit {
                 isShowInput: true
             },
             {
-                title: '姓名',
+                title: '开户人',
                 sortIcon: false,
                 isShowInput: true
             },

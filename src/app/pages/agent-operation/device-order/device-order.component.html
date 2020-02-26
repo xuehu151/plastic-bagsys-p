@@ -27,7 +27,7 @@
                         <div class="input-panel">
                             <span class="row-name">购买者</span>
                             <div class="row-input">
-                                <input type="text" [(ngModel)]="memberId " placeholder="输入用户编号">
+                                <input type="text" [(ngModel)]="memberNum " placeholder="输入用户编号">
                             </div>
                         </div>
                         <div class="input-panel">
@@ -37,9 +37,9 @@
                             </div>
                         </div>
                         <div class="input-panel">
-                            <span class="row-name">设备ID</span>
+                            <span class="row-name">设备编号</span>
                             <div class="row-input">
-                                <input type="text" [(ngModel)]="deviceId " placeholder="输入设备ID">
+                                <input type="text" [(ngModel)]="deviceCode " placeholder="输入设备编号">
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                             <span class="row-name">交易状态</span>
                             <div class="row-input">
                                 <select  [(ngModel)]="status">
-                                    <option value="" disabled>请选择</option>
+                                    <option value="">全部</option>
                                     <option value="1">未处理</option>
                                     <option value="2">成功</option>
                                     <option value="3">异常</option>
@@ -99,12 +99,12 @@
                         [ngClass]="{inputClass: item.isSelect}">
                         <td class="role-name">{{item.sn}}</td>
                         <td>{{item.userName}}</td>
-                        <td>{{item.deviceId}}</td>
+                        <td>{{item.deviceCode}}</td>
                         <td class="role-name">{{item.address}}</td>
                         <td>{{item.price}}</td>
                         <td>{{item.profitPercent}}</td>
                         <td>{{item.profitBalance}}</td>
-                        <td>{{item.memberId}}</td>
+                        <td>{{item.memberNum}}</td>
                         <td  class="role-name">{{item.transactionNo}}</td>
                         <td>{{item.createTime}}</td>
                         <td>{{item.status | businessStatus}}</td>
