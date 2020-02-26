@@ -4,13 +4,11 @@ import { AuthorityRoutingModule, routedComponents } from './authority-routing.mo
 import { EditUserModalComponent } from "./edit-user/editUserModal.component";
 import { DialogBoxModalComponent } from "./dialog/dialogBoxModal.component";
 import { AddUserModalComponent } from "./add-user/addUserModal.component";
-import { EditRoleComponent } from "./edit-role/edit-role.component";
 
 const components = [
     EditUserModalComponent,
     AddUserModalComponent,
     DialogBoxModalComponent,
-    EditRoleComponent,
 ];
 
 @NgModule({

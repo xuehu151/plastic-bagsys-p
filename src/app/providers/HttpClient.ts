@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Router } from '@angular/router';
 import { ServiceConfig } from './service.config';
+import { Toastrervice } from "../providers/toastrService";
 
 
 @Injectable()
 export class HttpCustormClient {
 
     constructor ( public http: HttpClient,
+                  private toastr: Toastrervice,
                   private router: Router ) {
     }
 
@@ -138,12 +140,41 @@ export class HttpCustormClient {
             });
     }
 
+    public exportExcel (url:string, listName: string, params?: any ) {
+        /*导出excle*/
+        const TOKEN = localStorage.getItem('token');
+        let URL = ServiceConfig.APIBASE + url;
+        let headers = {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json,application/vnd.ms-excel' })
+        };
+        this.http.get(URL, {
+            headers: headers.headers.append('X-Auth-Token', TOKEN),
+            params: params,
+            responseType: 'blob',
+            observe: 'body'
+        }).subscribe(res => {
+            this.toastr.showToast('success', '','导出成功!');
+            let url = window.URL.createObjectURL(res);
+            let a = document.createElement('a');
+            document.body.appendChild(a);
+            a.setAttribute('style', 'display: none');
+            a.href = url;
+            a.download = listName + ".xlsx";
+            a.click();
+            window.URL.revokeObjectURL(url);
+            a.remove();
+        }, error => {
+            this.handleSubscribeError(error);
+        });
+    }
+
     private handleSubscribeError ( error: any ) {
         const TOKEN = localStorage.getItem('token');
         if ( error.status === 401 || !TOKEN ) {
             localStorage.clear();
             this.router.navigate(['/customAuth/login']);
         }
-        console.info('origin error: ', error);
+        this.toastr.showToast('danger', '','网络请求出错，请检查网络重试!');
+        // console.info('origin error: ', error);
     }
 }

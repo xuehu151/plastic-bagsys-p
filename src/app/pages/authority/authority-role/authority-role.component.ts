@@ -4,7 +4,6 @@ import { HttpCustormClient } from '../../../providers/HttpClient';
 import { ServiceConfig } from '../../../providers/service.config';
 import { Router } from '@angular/router';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { EditRoleComponent } from "../edit-role/edit-role.component";
 
 @Component({
     selector: 'ngx-authority-role',
@@ -90,14 +89,12 @@ export class AuthorityRoleComponent implements OnInit {
     }
 
     startEdit ( item ): void {
-        const activeModal = this.modalService.open(EditRoleComponent, {
-            size: 'lg',
-            windowClass: 'lgModal',
-            container: 'nb-layout',
-            backdrop: 'static',
-            keyboard: false
-        });
-        activeModal.componentInstance.item = item;
+        this.router.navigate([ '/pages/authority/add-role' ],
+            {
+                queryParams: {
+                    data: JSON.stringify(item)
+                }
+            });
     }
 
     changePage ( $event ) {

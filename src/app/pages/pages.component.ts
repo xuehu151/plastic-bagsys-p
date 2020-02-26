@@ -29,7 +29,6 @@ export class PagesComponent implements OnInit {
 
     getMentJson (): any {
         this.http.get(ServiceConfig.GETUSERINFO, ( res ) => {
-            console.info(res);
             if ( res.code === 10000 ) {
                 for ( let list of this.menu ) {
                     for ( let item of res.data.resources ) {
@@ -56,7 +55,6 @@ export class PagesComponent implements OnInit {
             }
         })
     }
-
 
     getMentJsonq (): void {
         this.http.getJson('./././././assets/json/menu.json', ( res ) => {

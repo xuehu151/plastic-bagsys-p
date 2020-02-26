@@ -65,6 +65,11 @@
         .sure {
             margin-right: 2rem;
         }
+        .cancel {
+            margin-left: 5px;
+            border-color: #ff708d;
+            background-color: #ff708d;
+        }
     }
 
     input[type="checkbox"]:checked:after {

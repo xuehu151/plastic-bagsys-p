@@ -10,8 +10,7 @@ export class ServiceConfig {
     public static ADDUSER = 'sys/user/add';//添加
     public static GETUSERINFO = 'sys/user/getUserInfo';//获取用户信息
     //角色
-    public static ADDROLE = 'sys/role/add';
-    public static EDITROLE = 'sys/role/edit';
+    public static CHANGEROLE = 'sys/role/';
     public static ROLE = 'sys/role/findPage';
     public static ROLELIST = 'sys/role/list';
     //商品
@@ -48,4 +47,6 @@ export class ServiceConfig {
     public static AUDIT = 'biz/withdraw/audit';
     //生成二维码
     public static CREATQRCODE = 'biz/device/createQRCode';
+    //导出
+    public static EXPORTDEVICE = 'biz/device/exportDevice';
 }

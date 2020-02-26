@@ -181,12 +181,14 @@ export class DeviceManageComponent implements OnInit {
                 this.toastr.showToast('danger', '', res.message);
             }
         })
-
     }
 
     exportDeviceExcel (): void {
         //导出
-        console.info('导出')
+        let params = {
+
+        };
+        this.http.exportExcel(ServiceConfig.EXPORTDEVICE, '设备列表11', params)
     }
 
     QRcode(item):void{

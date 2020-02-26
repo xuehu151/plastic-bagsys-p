@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Toastrervice } from "../../../providers/toastrService";
 import { HttpCustormClient } from '../../../providers/HttpClient';
 import { ServiceConfig } from '../../../providers/service.config';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'ngx-role',
@@ -16,9 +16,12 @@ export class AddRoleComponent implements OnInit {
     signatureIdArr: Array<any> = [];
     roleName: string;
     auth: boolean;
-    roleId: number = 0;
+    requestUrl: string = '';
+    cancelBtn: boolean = false;
+    roleId: string;
 
     constructor ( private http: HttpCustormClient,
+                  private activeRoute: ActivatedRoute,
                   private router: Router,
                   private toastr: Toastrervice, ) {
     }
@@ -104,19 +107,33 @@ export class AddRoleComponent implements OnInit {
                 ]
             },
         ];
+        this.activeRoute.queryParams.subscribe(params => {
+            if ( Object.keys(params).length === 0 ) {
+                this.requestUrl = 'add';
+                this.cancelBtn = false;
+            }
+            else {
+                this.requestUrl = 'edit';
+                this.cancelBtn = true;
+                let obj = JSON.parse(params.data);
+                this.roleName = obj.name;
+                this.roleId = obj.id;
+            }
+        });
     }
 
-    selectRole($event, item): void{
+    selectRole($event, item): any{
         item.isShow = $event.target.checked;
         if ( $event.target.checked ) {
             this.signatureIdArr = [];
-            this.roleArray.forEach(item => {
-                this.signatureIdArr.push(item.resourceKey);
-            })
+            for (let list of item.children){
+                this.signatureIdArr.push(list.resourceKey);
+            }
         }
         else {
             this.signatureIdArr = [];
         }
+        console.info( this.signatureIdArr )
     }
 
     selectRoleItem($event, roleCh, role): void{
@@ -133,8 +150,8 @@ export class AddRoleComponent implements OnInit {
     }
 
     addRole (): any {
-        console.info(this.roleArray)
         let params = {
+            id: this.roleId,
             name: this.roleName,
             funcIds: []
         };
@@ -142,15 +159,19 @@ export class AddRoleComponent implements OnInit {
             this.toastr.showToast('danger', '', '输入角色名!');
             return false
         }
-        this.http.post(ServiceConfig.ADDROLE, params, ( res ) => {
+        this.http.post(ServiceConfig.CHANGEROLE + this.requestUrl, params, ( res ) => {
             if ( res.code === 10000 ) {
-                this.toastr.showToast('success', '', '添加成功!');
+                this.toastr.showToast('success', '', res.message);
                 this.router.navigate([ '/pages/authority/authority-role' ]);
             }
             else {
                 this.toastr.showToast('danger', '', res.message);
             }
         })
+    }
+
+    cancel(): void{
+        this.router.navigate([ '/pages/authority/authority-role' ]);
     }
 
 }
