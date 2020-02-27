@@ -71,7 +71,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class QRcodeModalComponent implements OnInit {
     @Input() data: string;
     imgUrl: string = '';
-    pageUrl: string = '';
+    pageUrl: string = 'pages/in-purchase/in-purchase';
 
     constructor ( private activeModal: NgbActiveModal,
                   private sanitizer: DomSanitizer,
