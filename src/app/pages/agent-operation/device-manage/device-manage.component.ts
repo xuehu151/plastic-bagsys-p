@@ -186,9 +186,17 @@ export class DeviceManageComponent implements OnInit {
     exportDeviceExcel (): void {
         //导出
         let params = {
-
+            address: this.trimService.trim(this.address) || '',
+            deviceId: this.trimService.trim(this.deviceId) || '',
+            agentName: this.trimService.trim(this.agentName) || '',
+            agentPhone: this.trimService.trim(this.agentPhone) || '',
+            managerPhone: this.trimService.trim(this.managerPhone) || '',
+            deviceCode: this.trimService.trim(this.deviceCode) || '',
+            cityId: this.cityId || '',
+            provinceId: this.provinceId || '',
+            runStatus: this.runStatus
         };
-        this.http.exportExcel(ServiceConfig.EXPORTDEVICE, '设备列表11', params)
+        this.http.exportExcel(ServiceConfig.EXPORTDEVICE, '设备列表', params)
     }
 
     QRcode(item):void{

@@ -101,7 +101,6 @@ export class OrderListComponent implements OnInit {
     }
 
     searchOrderList (): void {
-        console.info(this.startApplyDate);
         this.startCreateTime = this.startApplyDate && this.startApplyDate['year'] + '-' + this.startApplyDate['month'] + '-' + this.startApplyDate['day'] + ' 00:00:00';
         // this.endCreateTime = this.endApplyDate && this.endApplyDate['year'] + '-' + this.endApplyDate['month'] + '-' + this.endApplyDate['day'] + '00:00:00';
         let params = {
@@ -156,7 +155,18 @@ export class OrderListComponent implements OnInit {
     }
 
     exportOrderExcel (): void {
-
+        this.startCreateTime = this.startApplyDate && this.startApplyDate['year'] + '-' + this.startApplyDate['month'] + '-' + this.startApplyDate['day'] + ' 00:00:00';
+        // this.endCreateTime = this.endApplyDate && this.endApplyDate['year'] + '-' + this.endApplyDate['month'] + '-' + this.endApplyDate['day'] + '00:00:00';
+        //导出
+        let params = {
+            consignee: this.consignee || '',
+            signeeMobile: this.signeeMobile || '',
+            status: this.orderStatus || '',
+            goodsId: this.goodsId || '',
+            startCreateTime: this.startCreateTime || '',
+            endCreateTime: this.endCreateTime || ''
+        };
+        this.http.exportExcel(ServiceConfig.EXPORTORDER, '采购订单列表', params)
     }
 
     changePage ( $event ) {

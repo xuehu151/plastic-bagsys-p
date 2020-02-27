@@ -49,4 +49,12 @@ export class ServiceConfig {
     public static CREATQRCODE = 'biz/device/createQRCode';
     //导出
     public static EXPORTDEVICE = 'biz/device/exportDevice';
+    public static EXPORTAGENT = 'biz/agent/exportAgent';
+    public static EXPORTMEMBER = 'sys/member/exportMember';
+    public static EXPORTORDER = 'biz/order/purchase/exportOrder';
+    public static EXPORTHISTORYORDER = 'biz/order/purchase/exportHistoryOrder';
+    public static EXPORTSCANORDER = 'biz/order/scan/exportOrder';
+    public static EXPORTWITHDRAWRECORD = 'biz/withdraw/exportWithdrawRecord';
+    public static EXPORTHISTORYWITHDRAWRECORD = 'biz/withdraw/exportHistoryWithdrawRecord';
 }
+

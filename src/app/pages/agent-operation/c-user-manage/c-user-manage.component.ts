@@ -89,7 +89,12 @@ export class CUserManageComponent implements OnInit {
     }
 
     exportCUserExcel (): void {
-
+        //导出
+        let params = {
+            memNum: this.memNum || '',
+            nickname: this.nickname || ''
+        };
+        this.http.exportExcel(ServiceConfig.EXPORTMEMBER, 'C端会员列表', params)
     }
 
     changePage ( $event ) {

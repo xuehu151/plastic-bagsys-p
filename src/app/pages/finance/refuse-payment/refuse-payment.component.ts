@@ -206,7 +206,13 @@ export class RefusePaymentComponent implements OnInit {
 
     exportExcel (): void {
         //导出
-        console.info('导出')
+        let params = {
+            name: this.payeeName || '',
+            phone: this.payeephone || '',
+            status: this.statusArr || '',
+            timeSort: this.sortArg || ''
+        };
+        this.http.exportExcel(ServiceConfig.EXPORTWITHDRAWRECORD, '打款列表', params)
     }
 
     batchRefuse (): void {

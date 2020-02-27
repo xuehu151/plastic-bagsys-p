@@ -131,7 +131,14 @@ export class MakeMoneyHistoryComponent implements OnInit {
     }
 
     exportPayHistoryExcel(): void{
-
+        //导出
+        let params = {
+            name: this.payeeName || '',
+            phone: this.payeephone || '',
+            status: [ 2, 3 ],
+            timeSort: this.sortArg
+        };
+        this.http.exportExcel(ServiceConfig.EXPORTHISTORYWITHDRAWRECORD, '打款历史列表', params)
     }
 
 }

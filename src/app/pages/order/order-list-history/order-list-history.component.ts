@@ -111,7 +111,22 @@ export class OrderListHistoryComponent implements OnInit {
     }
 
     exportOrderHistoryExcel (): void {
-
+        this.startCreateTime = this.applyDate && this.applyDate['year'] + '-' + this.applyDate['month'] + '-' + this.applyDate['day'] + ' 00:00:00';
+        this.startHandleTime = this.issuanceDate && this.issuanceDate['year'] + '-' + this.issuanceDate['month'] + '-' + this.issuanceDate['day'] + ' 00:00:00';
+        //导出
+        let params = {
+            consignee: this.consignee || '',
+            goodsId: this.goodsId || '',
+            signeeMobile: this.signeeMobile || '',
+            status: this.status || '',
+            handleUserName: this.handleUserName || '',
+            trackNum: this.trackNum || '',
+            startCreateTime: this.startCreateTime || '',
+            endCreateTime: this.endCreateTime || '',
+            startHandleTime	: this.startHandleTime || '',
+            endHandleTime: this.endHandleTime || ''
+        };
+        this.http.exportExcel(ServiceConfig.EXPORTHISTORYORDER, '采购订单历史列表', params)
     }
 
     searchOrderHistoryList(): void{
@@ -129,7 +144,7 @@ export class OrderListHistoryComponent implements OnInit {
                 trackNum: this.trackNum,
                 startCreateTime: this.startCreateTime,
                 endCreateTime: this.endCreateTime,
-                startHandleTime	: this.startHandleTime	,
+                startHandleTime	: this.startHandleTime,
                 endHandleTime: this.endHandleTime
             }
         };

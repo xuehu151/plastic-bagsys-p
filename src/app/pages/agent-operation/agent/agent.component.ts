@@ -144,8 +144,16 @@ export class AgentComponent implements OnInit {
     }
 
     exportAgentExcel (): void {
-        //导出AGENTLIST
-        console.info('导出')
+        //导出
+        let params = {
+            compName: this.agentCompanyName || '',
+            managerPhone: this.managerPhone || '',
+            name: this.agentName || '',
+            phone: this.agentTelephone || '',
+            cityId: Number(this.cityId) || this.cityId || '',
+            provinceId: this.provinceId || ''
+        };
+        this.http.exportExcel(ServiceConfig.EXPORTAGENT, '代理商列表', params)
     }
 
     startEditAgent ( item ): void {

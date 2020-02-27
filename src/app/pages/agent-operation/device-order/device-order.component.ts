@@ -128,7 +128,17 @@ export class DeviceOrderComponent implements OnInit {
     }
 
     exportDeviceExcel(): void{
-
+        //导出
+        let params = {
+            address: this.address || '',
+            agentName: this.agentName || '',
+            deviceCode: this.deviceCode || '',
+            memberNum: this.memberNum || '',
+            sn: this.sn || '',
+            status: this.status || '',
+            transactionNo: this.transactionNo || ''
+        };
+        this.http.exportExcel(ServiceConfig.EXPORTSCANORDER, '扫码订单列表', params)
     }
 
     changePage ( $event ) {
