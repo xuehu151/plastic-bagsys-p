@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpCustormClient } from '../../../providers/HttpClient'
 import { ServiceConfig } from '../../../providers/service.config';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Toastrervice } from "../../../providers/toastrService";
 
 @Component({
     selector: 'ngx-QRcode',
@@ -75,6 +76,7 @@ export class QRcodeModalComponent implements OnInit {
 
     constructor ( private activeModal: NgbActiveModal,
                   private sanitizer: DomSanitizer,
+                  private toastr: Toastrervice,
                   private http: HttpCustormClient, ) {
     }
 
@@ -96,6 +98,7 @@ export class QRcodeModalComponent implements OnInit {
             if ( res.code === 10000 ) {
                 // this.imgUrl = 'http://pic.qqtn.com/up/2017-7/201707261418467451826.png';
                 this.imgUrl = res.data;
+                this.toastr.showToast('success', '', '更新成功!');
             }
         })
     }

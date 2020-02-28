@@ -33,8 +33,7 @@
                                     <div class="row-checkbox" *ngFor="let roleCh of role.children">
                                         <label>{{roleCh.name}}</label>
                                         <input type="checkbox"
-                                               [checked]='signatureIdArr.indexOf(roleCh.resourceKey)>-1'
-                                               id="{{role.resourceKey}}"
+                                               [checked]=roleCh.isShow
                                                (change)="selectRoleItem($event, roleCh, role)"
                                                class="check-box">
                                     </div>

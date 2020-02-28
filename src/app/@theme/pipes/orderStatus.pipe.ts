@@ -56,6 +56,9 @@ export class PurchaseStatusPipe implements PipeTransform {
             case 2:
                 purchaseStatus = '已付款';
                 break;
+            case 3:
+                purchaseStatus = '已发货';
+                break;
             default:
                 purchaseStatus = '未知';
         }

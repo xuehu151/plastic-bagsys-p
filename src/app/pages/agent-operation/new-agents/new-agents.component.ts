@@ -148,7 +148,7 @@ export class AddAgentsComponent implements OnInit {
             // console.info(res);
             if ( res.code === 10000 ) {
                 this.toastr.showToast('success', '', '修改成功!');
-                this.activeModal.close();
+                this.activeModal.close('success');
             }
             else {
                 this.toastr.showToast('danger', '', res.message);

@@ -111,7 +111,7 @@ export class DeviceOrderComponent implements OnInit {
             }
         };
         this.http.post(ServiceConfig.SCANORDER, params, ( res ) => {
-            console.info(res);
+            // console.info(res);
             if ( res.code === 10000 ) {
                 this.tableList = res.data.records;
                 this.totalCount = res.data.totalCount;

@@ -22,6 +22,8 @@ export class ServiceConfig {
     public static DEVICELIST = 'biz/device/findPage';
     public static QUERYDEVICE = 'biz/device/info/';//根据id查询
     //功能
+    public static GETUSERMENU = 'sys/user/getUserMenu';
+    public static INFOBYID = 'sys/role/infoById/';
     public static MENUADD = 'sys/func/add';
     public static MENUEDIT = 'sys/func/edit';
     public static MENULIST = 'sys/func/list';

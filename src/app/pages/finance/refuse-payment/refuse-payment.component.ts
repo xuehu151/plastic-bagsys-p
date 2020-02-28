@@ -184,7 +184,7 @@ export class RefusePaymentComponent implements OnInit {
             }
         };
         this.http.post(ServiceConfig.WITHDRAW, params, ( res ) => {
-            console.info(res);
+            // console.info(res);
             if ( res.code === 10000 ) {
                 this.tableList = res.data.records;
                 this.totalCount = res.data.totalCount;

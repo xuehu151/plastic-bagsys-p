@@ -19,6 +19,7 @@ export class LoginComponent implements AfterViewInit, OnInit {
     errInfo: string = '';
     loading: boolean = false;
     loadingText: string = '正在登录...';
+    roleArray: Array<any> = [];
 
     constructor ( private http: HttpCustormClient,
                   private configService: ConfigService,
@@ -49,9 +50,20 @@ export class LoginComponent implements AfterViewInit, OnInit {
         }, ( res ) => {
             this.loading = false;
             if ( res.code === 10000 ) {
-                this.router.navigate([ '/pages/authority/authority-user' ]);
                 localStorage.setItem('isLogin', 'true');
                 localStorage.setItem('token', res.data.token);
+                this.http.get(ServiceConfig.GETUSERMENU, ( res ) => {
+                    this.roleArray.push(...res.data);
+                    for (let item of this.roleArray){
+                        if(!item.hidden){
+                            this.router.navigate([ item.children[0]['link'] ]);
+                            return
+                        }
+                        else {
+
+                        }
+                    }
+                });
             }
             else {
                 this.errInfo = res.message;

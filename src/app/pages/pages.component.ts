@@ -15,8 +15,8 @@ import { ServiceConfig } from '../providers/service.config';
 })
 export class PagesComponent implements OnInit {
     menuList = MENU_ITEMS;
-    // menu: Array<any> = [];
-    menu = MENU_ITEMS;
+    menu: Array<any> = [];
+    // menu = MENU_ITEMS;
 
     constructor ( private http: HttpCustormClient, ) {
 
@@ -24,7 +24,22 @@ export class PagesComponent implements OnInit {
 
     ngOnInit () {
         // this.getMentJsonq();
-        this.getMentJson();
+        // this.getMentJson();
+        this.getUserMenu();
+    };
+
+    getUserMenu(): void{
+        this.http.get(ServiceConfig.GETUSERMENU, ( res ) => {
+            // console.info(res)
+            this.menu = res.data;
+            this.menu.filter( item => {
+                item.children.filter( list => {
+                    if(!list.children.length){
+                        delete list.children
+                    }
+                });
+            })
+        })
     }
 
     getMentJson (): any {
@@ -61,7 +76,7 @@ export class PagesComponent implements OnInit {
             for ( let item of res ) {
                 for ( let list of this.menuList ) {
                     if ( item.data.id === list.data.id ) {
-                        this.menu.push(list);
+                        this.menu.push(item);
                     }
                 }
             }
