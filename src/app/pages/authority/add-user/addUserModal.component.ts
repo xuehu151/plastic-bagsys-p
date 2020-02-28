@@ -20,8 +20,7 @@ import { ServiceConfig } from '../../../providers/service.config';
 export class AddUserModalComponent implements OnInit {
     username: string;
     userTelephone: string;
-    roleId: number = 0;
-    userRole: string = '';
+    roleId: string = '';
     roleList: Array<any> = [];
 
     constructor ( private activeModal: NgbActiveModal,

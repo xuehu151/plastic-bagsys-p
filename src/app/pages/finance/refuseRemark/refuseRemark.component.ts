@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceConfig } from '../../../providers/service.config';
 import { HttpCustormClient } from '../../../providers/HttpClient'
+import { Toastrervice } from "../../../providers/toastrService";
 
 @Component({
     selector: 'ngx-refuseRemark',
@@ -23,6 +24,7 @@ export class RefuseRemarkComponent implements OnInit {
     remarks: string;
 
     constructor ( private activeModal: NgbActiveModal,
+                  private toastr: Toastrervice,
                   private http: HttpCustormClient, ) {
     }
 
@@ -33,7 +35,11 @@ export class RefuseRemarkComponent implements OnInit {
         this.activeModal.close();
     }
 
-    sure (): void {
+    sure (): any {
+        if(!this.remarks){
+            this.toastr.showToast('danger', '', '拒绝理由不能为空!');
+            return false
+        }
         this.http.post(ServiceConfig.AUDIT + '?id=' + this.data.id + '&status=3&remarks=' + this.remarks, {}, ( res ) => {
             if(res.code === 10000){
                 this.activeModal.close('success');
