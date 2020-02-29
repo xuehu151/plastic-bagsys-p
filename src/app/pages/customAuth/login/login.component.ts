@@ -56,8 +56,12 @@ export class LoginComponent implements AfterViewInit, OnInit {
                     this.roleArray.push(...res.data);
                     for (let item of this.roleArray){
                         if(!item.hidden){
-                            this.router.navigate([ item.children[0]['link'] ]);
-                            return
+                            for (let list of item.children){
+                                if(!list.hidden){
+                                    this.router.navigate([ list['link'] ]);
+                                    return
+                                }
+                            }
                         }
                         else {
 
