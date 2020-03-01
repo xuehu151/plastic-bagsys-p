@@ -28,13 +28,13 @@
                             <span class="row-name">选择省市区</span>
                             <div class="row-input">
                                 <select class="form-control select-width" (change)="changeProvice($event)" >
-                                    <option value="" disabled>选择省</option>
+                                    <option value="">全部</option>
                                     <option *ngFor="let pro of proviceData;let i=index"  [value]='pro.id' >
                                         {{pro.name}}
                                     </option>
                                 </select>
                                 <select class="form-control select-width" [(ngModel)]="cityId">
-                                    <option value="" disabled>选择市</option>
+                                    <option value="0">全部</option>
                                     <option *ngFor="let city of cityData; let i=index"  [value]='city.id' >
                                         {{city.name}}
                                     </option>

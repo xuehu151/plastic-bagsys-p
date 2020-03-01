@@ -8,31 +8,31 @@
             <div class="row">
                 <span class="row-name">代理商姓名 <i>*</i></span>
                 <div class="row-input">
-                    <input type="text" [(ngModel)]="agentData.name" placeholder="输入代理商姓名">
+                    <input type="text" [(ngModel)]="editAgentParams.name" placeholder="输入代理商姓名">
                 </div>
             </div>
             <div class="row">
                 <span class="row-name">代理商手机号 <i>*</i></span>
                 <div class="row-input">
-                    <input type="text" [(ngModel)]="agentData.phone" placeholder="输入代理商手机号">
+                    <input type="text" [(ngModel)]="editAgentParams.phone" placeholder="输入代理商手机号">
                 </div>
             </div>
             <div class="row">
                 <span class="row-name">代理商公司名</span>
                 <div class="row-input">
-                    <input type="text" [(ngModel)]="agentData.compName" placeholder="输入代理商公司名">
+                    <input type="text" [(ngModel)]="editAgentParams.compName" placeholder="输入代理商公司名">
                 </div>
             </div>
             <div class="row">
                 <span class="row-name">管理员手机号</span>
                 <div class="row-input">
-                    <input type="text" [(ngModel)]="agentData.managerPhone" placeholder="输入管理员手机号">
+                    <input type="text" [(ngModel)]="editAgentParams.managerPhone" placeholder="输入管理员手机号">
                 </div>
             </div>
             <div class="row">
                 <span class="row-name">代理商级别</span>
                 <div class="row-input">
-                    <select class="form-control" [(ngModel)]="agentData.level">
+                    <select class="form-control" [(ngModel)]="editAgentParams.level">
                         <option value="" disabled>-请选择级别-</option>
                         <option value="1">一级</option>
                         <option value="2">二级</option>
@@ -44,6 +44,7 @@
                 <div class="row-input agent">
                     <div class="area-list">
                         <select class="form-control select-width"
+                                [(ngModel)]="provinceId"
                                 (change)="changeProvice($event)">
                             <option value="" disabled>-请选择省份-</option>
                             <option *ngFor="let pro of proviceData;let i=index"  [value]='pro.id' >
@@ -51,6 +52,7 @@
                             </option>
                         </select>
                         <select class="form-control select-width"
+                                [(ngModel)]="cityId"
                                 (change)="changeCity($event)">
                             <option value="" disabled>-请选择城市-</option>
                             <option *ngFor="let city of cityData; let i=index"  [value]='city.id' >

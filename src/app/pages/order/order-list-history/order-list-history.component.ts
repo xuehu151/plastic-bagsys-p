@@ -30,6 +30,7 @@ export class OrderListHistoryComponent implements OnInit {
     endCreateTime: string;
     startHandleTime: string;
     endHandleTime: string;
+    finished: number = 1;
 
     constructor ( private areaDataService: AreaDataService,
                   private http: HttpCustormClient,
@@ -138,6 +139,7 @@ export class OrderListHistoryComponent implements OnInit {
             entity: {
                 consignee: this.consignee,
                 goodsId: this.goodsId,
+                finished: this.finished,
                 signeeMobile: this.signeeMobile,
                 status: this.status,
                 handleUserName: this.handleUserName,

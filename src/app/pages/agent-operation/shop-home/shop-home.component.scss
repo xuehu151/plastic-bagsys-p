@@ -1,0 +1,71 @@
+@import '../../../@theme/styles/themes';
+
+.header-title {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    .header-input {
+        width: calc(80% + 10px);
+    }
+    .input-panel {
+        width: calc(33% - 10px);
+        margin-left: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .input-panel:first-child {
+        margin-left: 0;
+    }
+}
+
+.row-input{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .select-width{
+        width: 48%!important;
+    }
+}
+
+.header-btn {
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    button {
+        color: #fff;
+        padding: .6875rem 1.125rem;
+        border-style: solid;
+        border-width: .0625rem;
+        border-radius: .25rem;
+        font-size: .875rem;
+        line-height: 1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        outline: none;
+    }
+    .search {
+        background-color: #00d68f;
+        border-color: #00d68f;
+    }
+    .add {
+        margin-left: 10px;
+        background-color: #598bff;
+        border-color: #598bff;
+    }
+    .export{
+        margin-left: 10px;
+        background-color: #fa0;
+        border-color: #fa0;
+    }
+}
+
+.courierNum{
+    background: #c5c5c5!important;
+}
+
+.role-name{
+    width: 8rem;
+}

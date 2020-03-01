@@ -34,7 +34,7 @@
                             <span class="row-name">订单状态</span>
                             <div class="row-input">
                                 <select  [(ngModel)]="status">
-                                    <option value="" disabled>请选择</option>
+                                    <option value="">全部</option>
                                     <option value="1">待支付</option>
                                     <option value="3">已发货</option>
                                 </select>
@@ -44,7 +44,7 @@
                             <span class="row-name">选择物品</span>
                             <div class="row-input">
                                 <select  [(ngModel)]="goodsId">
-                                    <option value="" disabled>请选择</option>
+                                    <option value="">全部</option>
                                     <option *ngFor="let goods of goodsList" [value]="goods.id">
                                         {{goods.name}}
                                     </option>

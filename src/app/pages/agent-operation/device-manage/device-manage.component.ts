@@ -33,7 +33,7 @@ export class DeviceManageComponent implements OnInit {
     pageSize: number = 10;
     totalCount: number = 0;
     totalPage: number = 0;
-    runStatus: number = 1;
+    runStatus: string = '';
     isEnable: number = 1;
 
     constructor ( private http: HttpCustormClient,

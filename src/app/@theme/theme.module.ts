@@ -52,6 +52,7 @@ import {
     OrderStatusPipe,
     BusinessStatusPipe,
     PurchaseStatusPipe,
+    StandardPipe,
 } from './pipes';
 import {
     OneColumnLayoutComponent,
@@ -131,6 +132,7 @@ const PIPES = [
     OrderStatusPipe,
     BusinessStatusPipe,
     PurchaseStatusPipe,
+    StandardPipe,
 ];
 
 const NB_THEME_PROVIDERS = [

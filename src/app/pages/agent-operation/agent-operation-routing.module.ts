@@ -4,7 +4,9 @@ import { AgentOperationComponent } from "./agent-operation.component";
 import { DeviceManageComponent } from "./device-manage/device-manage.component";
 import { CUserManageComponent } from "./c-user-manage/c-user-manage.component";
 import { DeviceOrderComponent } from "./device-order/device-order.component";
+import { ShopComponent } from "./shop-home/shop-home.component";
 import { AgentComponent } from "./agent/agent.component";
+
 
 const routes: Routes = [ {
     path: '',
@@ -26,10 +28,10 @@ const routes: Routes = [ {
             path: 'device-order',
             component: DeviceOrderComponent,
         },
-        // {
-        //     path: 'new-agents',
-        //     component: NewAgentsComponent,
-        // }
+        {
+            path: 'shop-home',
+            component: ShopComponent,
+        }
     ],
 } ];
 
@@ -46,4 +48,5 @@ export const routedComponents = [
     CUserManageComponent,
     DeviceOrderComponent,
     AgentComponent,
+    ShopComponent,
 ];

@@ -5,74 +5,41 @@
                 <div class="edit-body">
                     <div class="row">
                         <div class="input-panel">
-                            <span class="row-name">收货人姓名</span>
+                            <span class="row-name">商品名称</span>
                             <div class="row-input">
-                                <input type="text" [(ngModel)]="consignee" placeholder="输入收货人姓名">
+                                <input type="text" [(ngModel)]="name" placeholder="输入商品名称">
                             </div>
                         </div>
                         <div class="input-panel">
-                            <span class="row-name">收货人手机号</span>
+                            <span class="row-name">商品成本价</span>
                             <div class="row-input">
-                                <input type="text" [(ngModel)]="signeeMobile" placeholder="输入收货人手机号">
+                                <input type="text" [(ngModel)]="cost" placeholder="输入成商品本价">
                             </div>
                         </div>
                         <div class="input-panel">
-                            <span class="row-name">订单状态</span>
+                            <span class="row-name">商品售价</span>
                             <div class="row-input">
-                                <select  [(ngModel)]="orderStatus ">
-                                    <option value="">全部</option>
-                                    <option value="1">待支付</option>
-                                    <option value="2">已支付</option>
-                                </select>
+                                <input type="text" [(ngModel)]="price" placeholder="输入商品售价">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-panel">
-                            <span class="row-name">选择物品</span>
+                            <span class="row-name">商品规格</span>
                             <div class="row-input">
-                                <select  [(ngModel)]="goodsId">
+                                <select  [(ngModel)]="standard ">
                                     <option value="">全部</option>
-                                    <option *ngFor="let goods of goodsList" [value]="goods.id">
-                                        {{goods.name}}
-                                    </option>
+                                    <option value="1">小袋子</option>
+                                    <option value="2">大袋子</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="input-panel">
-                            <span class="row-name">申请日期</span>
-                            <div class="row-input">
-                                <input type="text"
-                                       class="form-control pull-right"
-                                       [(ngModel)]="startApplyDate"
-                                       #d="ngbDatepicker"
-                                       ngbDatepicker
-                                       [displayMonths]="true"
-                                       [navigation]="true"
-                                       (click)="d.toggle()"
-                                       placeholder="申请日期">
-                            </div>
-                        </div>
-                       <!-- <div class="input-panel">
-                            <span class="row-name">申请结束日期</span>
-                            <div class="row-input">
-                                <input type="text"
-                                       class="form-control pull-right"
-                                       [(ngModel)]="endApplyDate"
-                                       #t="ngbDatepicker"
-                                       ngbDatepicker
-                                       [displayMonths]="true"
-                                       [navigation]="true"
-                                       (click)="t.toggle()"
-                                       placeholder="结束日期">
-                            </div>
-                        </div>-->
                     </div>
                 </div>
             </div>
             <div class="header-btn">
-                <button class="search" (click)="searchOrderList()">搜索</button>
-                <button class="export" (click)="exportOrderExcel()">导出</button>
+                <button class="search" (click)="getShopList()">搜索</button>
+                <button class="add" (click)="editShop('add')">添加</button>
             </div>
         </div>
     </nb-card-header>
@@ -109,20 +76,14 @@
                 <tbody class="table-body">
                     <tr *ngFor="let item of tableList; let i = index;"
                         [ngClass]="{inputClass: item.isSelect}">
-                        <td class="role-name">{{item.consignee}}</td>
-                        <td>{{item.signeeMobile}}</td>
-                        <td>{{item.goodsName}}</td>
-                        <td>{{item.count}}</td>
-                        <td>{{item.createTime}}</td>
-                        <td class="role-name">{{item.address}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.cost}}</td>
                         <td>{{item.price}}</td>
-                        <td>{{item.status| purchaseStatus}}</td>
-                        <td>{{item.remark}}</td>
+                        <td>{{item.standard | shopStandard}}</td>
                         <td  class="operator" *ngIf="item.isOperation">
                             <span
-                                [ngClass]="{'courierNum':item.status === 1 }"
-                                (click)="item.status === 1?'':fillBillNumber(item)">
-                                {{item.fillBillNumberText}}
+                                (click)="editShop(item)">
+                                {{item.editBtn}}
                             </span>
                         </td>
                     </tr>

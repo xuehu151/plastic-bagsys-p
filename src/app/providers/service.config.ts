@@ -16,6 +16,8 @@ export class ServiceConfig {
     //商品
     public static ADDGOOD = 'biz/goods/add';//添加商品
     public static GOODLIST  = 'biz/goods/list';//商品列表
+    public static GOODSPAGE = 'biz/goods/findPage';
+    public static UPDATEGOODS = 'biz/goods/';
     //设备
     public static ADDDEVICE = 'biz/device/add';
     public static EDITDEVICE = 'biz/device/edit';
@@ -32,7 +34,7 @@ export class ServiceConfig {
     public static ADDAGENT = 'biz/agent/add';
     public static EDITAGENT = 'biz/agent/edit';
     public static AGENTLIST = 'biz/agent/findPage';
-    public static QUERYAGENT = 'biz/agent/info/';//根据id查询
+    public static QUERYAGENT = 'biz/agent/infoById/';//根据id查询
     public static ISENABLE = 'biz/device/editIsEnable';
     public static FINDBYPHONE = 'biz/agent/infoByPhone/';
     public static FINDAGENT = 'biz/agent/infoByDefault';

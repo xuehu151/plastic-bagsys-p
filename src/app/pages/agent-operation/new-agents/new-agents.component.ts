@@ -86,8 +86,8 @@ export class AddAgentsComponent implements OnInit {
                 this.cityData.push(item);
             }
         });
-        // this.cityName = this.cityData[ 0 ].name;
-        // this.cityId = this.cityData[ 0 ].id;
+        this.cityName = this.cityData[ 0 ].name;
+        this.cityId = this.cityData[ 0 ].id;
     }
 
     changeCity ( $event ): void {
@@ -147,7 +147,7 @@ export class AddAgentsComponent implements OnInit {
         this.http.post(ServiceConfig.ADDAGENT, params, ( res ) => {
             // console.info(res);
             if ( res.code === 10000 ) {
-                this.toastr.showToast('success', '', '修改成功!');
+                this.toastr.showToast('success', '', '添加成功!');
                 this.activeModal.close('success');
             }
             else {

@@ -48,9 +48,10 @@
                             <span class="row-name">运行状态</span>
                             <div class="row-input">
                                 <select class="form-control" [(ngModel)]="runStatus">
+                                    <option value="">全部</option>
                                     <option value="1">正常</option>
-                                    <option value="2">卡机</option>
-                                    <option value="3">缺货</option>
+                                    <option value="2">异常</option>
+                                    <option value="3">离线</option>
                                 </select>
                             </div>
                         </div>
@@ -60,13 +61,13 @@
                                 <select class="form-control select-width"
                                         [(ngModel)]="provinceId"
                                         (change)="changeProvice($event)">
-                                    <option value="" disabled>-请选择省-</option>
+                                    <option value="">全部</option>
                                     <option *ngFor="let pro of proviceData; let i=index;" [value]='pro.id'>
                                         {{pro.name}}
                                     </option>
                                 </select>
                                 <select class="form-control select-width" [(ngModel)]="cityId">
-                                    <option value="" disabled>-请选择市-</option>
+                                    <option value="">全部</option>
                                     <option *ngFor="let city of cityData; let i=index" [value]='city.id'>
                                         {{city.name}}
                                     </option>

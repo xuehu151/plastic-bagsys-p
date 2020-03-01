@@ -51,10 +51,10 @@ export class PurchaseStatusPipe implements PipeTransform {
         let purchaseStatus;
         switch ( value ) {
             case 1:
-                purchaseStatus = '待付款';
+                purchaseStatus = '待支付';
                 break;
             case 2:
-                purchaseStatus = '已付款';
+                purchaseStatus = '已支付';
                 break;
             case 3:
                 purchaseStatus = '已发货';

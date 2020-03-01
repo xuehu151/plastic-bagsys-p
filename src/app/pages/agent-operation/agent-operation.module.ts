@@ -6,6 +6,7 @@ import { AddDeviceComponent } from "./add-deviced/add-device.component";
 import { EditAgentComponent } from "./edit-agent/edit-agent.component";
 import { EditDeviceComponent } from "./edit-deviced/edit-device.component";
 import { QRcodeModalComponent } from "./QRcode/QRcode.component";
+import { EditShopComponent } from "./edit-shop/edit-shop.component";
 
 const components = [
     AddAgentsComponent,
@@ -13,6 +14,7 @@ const components = [
     EditDeviceComponent,
     EditAgentComponent,
     QRcodeModalComponent,
+    EditShopComponent,
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Toastrervice } from "../../../providers/toastrService";
 import { HttpCustormClient } from '../../../providers/HttpClient';
@@ -10,8 +10,8 @@ import { ServiceConfig } from '../../../providers/service.config';
     styleUrls: [ '../new-agents/new-agents.component.scss' ],
 })
 
-export class EditAgentComponent implements OnInit {
-    @Input() agentData: any;
+export class EditAgentComponent implements OnInit, AfterViewInit {
+    @Input() id: any;
     compName: string;
     provinceName: string = '';
     cityName: string = '';
@@ -20,8 +20,18 @@ export class EditAgentComponent implements OnInit {
     proviceData: Array<any> = [];
     cityData: Array<any> = [];
     cityArray: Array<any> = [];
+    editAgentParams = {
+        id: '',
+        name: '',
+        phone: '',
+        compName: '',
+        managerPhone: '',
+        level: '',
+        areaList: []
+    };
     cityId: number;
     provinceId: number;
+    areaArray: Array<any> = [];
 
     constructor ( private activeModal: NgbActiveModal,
                   private http: HttpCustormClient,
@@ -30,7 +40,31 @@ export class EditAgentComponent implements OnInit {
 
     ngOnInit () {
         this.getAreaInfo();
-        console.info(this.agentData)
+    }
+
+    ngAfterViewInit(){
+        this.getAgentId();
+    }
+
+    getAgentId (): void {
+        this.http.get(ServiceConfig.QUERYAGENT + this.id, ( res ) => {
+            // console.info(res);
+            if ( res.code === 10000 ) {
+                this.editAgentParams = res.data;
+                this.areaArray = res.data.areaList;
+                this.provinceId = this.areaArray[ 0 ].provinceId;
+                this.provinceName = this.areaArray[ 0 ].provinceName;
+                this.cityArray.filter( item => {
+                    if(this.provinceId === item.parentId){
+                        this.cityData.push(item);
+                    }
+                });
+                this.cityId = this.areaArray[ 0 ].cityId;
+            }
+            else {
+                this.toastr.showToast('danger', '', res.message);
+            }
+        })
     }
 
     cancel () {
@@ -94,8 +128,8 @@ export class EditAgentComponent implements OnInit {
                 this.cityData.push(item);
             }
         });
-        // this.cityName = this.cityData[ 0 ].name;
-        // this.cityId = this.cityData[ 0 ].id;
+        this.cityName = this.cityData[ 0 ].name;
+        this.cityId = this.cityData[ 0 ].id;
     }
 
     changeCity ( $event ): void {
@@ -116,11 +150,11 @@ export class EditAgentComponent implements OnInit {
         let telReg = /^1(3|4|5|6|7|8|9)\d{9}$/;
         let han = /^[\u4e00-\u9fa5]+$/;
         let passReg = /^[0-9]*$/;
-        if ( !han.test(this.agentData.name) || this.agentData.name.length > 10 ) {
+        if ( !han.test(this.editAgentParams.name) || this.editAgentParams.name.length > 10 ) {
             this.toastr.showToast('danger', '', '代理商姓名必须为汉字且不能为空并且长度不能大于10!');
             return false;
         }
-        else if ( !telReg.test(this.agentData.phone) ) {
+        else if ( !telReg.test(this.editAgentParams.phone) ) {
             this.toastr.showToast('danger', '', '输入合法的手机号!');
             return false;
         }
@@ -143,13 +177,13 @@ export class EditAgentComponent implements OnInit {
             ]
         }
         let params = {
-            id: this.agentData.id,
-            level: Number(this.agentData.level),
-            compName: this.agentData.compName,
-            managerPhone: this.agentData.managerPhone,
-            name: this.agentData.name,
+            id: this.editAgentParams.id,
+            level: Number(this.editAgentParams.level),
+            compName: this.editAgentParams.compName,
+            managerPhone: this.editAgentParams.managerPhone,
+            name: this.editAgentParams.name,
             password: this.agentPassword,
-            phone: this.agentData.phone,
+            phone: this.editAgentParams.phone,
             areaList: this.areaInfo,
         };
         this.http.put(ServiceConfig.EDITAGENT, params, ( res ) => {

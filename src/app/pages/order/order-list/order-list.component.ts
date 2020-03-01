@@ -29,6 +29,7 @@ export class OrderListComponent implements OnInit {
     totalPage: number = 0;
     startCreateTime: string;
     endCreateTime: string;
+    finished: number = 0;
 
     constructor ( private areaDataService: AreaDataService,
                   private modalService: NgbModal,
@@ -111,6 +112,7 @@ export class OrderListComponent implements OnInit {
                 signeeMobile: this.signeeMobile,
                 status: this.orderStatus,
                 goodsId: this.goodsId,
+                finished: this.finished,
                 startCreateTime: this.startCreateTime,
                 endCreateTime: this.endCreateTime
             }

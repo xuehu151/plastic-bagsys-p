@@ -10,10 +10,10 @@ export class RunStatusPipe implements PipeTransform {
                 runStatus = '正常';
                 break;
             case 2:
-                runStatus = '咔机';
+                runStatus = '异常';
                 break;
             case 3:
-                runStatus = '缺货';
+                runStatus = '离线';
                 break;
             default:
                 runStatus = '未知';

@@ -93,6 +93,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
                 },
                 link: '/pages/agent-operation/device-order',
             },
+            {
+                title: '商品管理',
+                hidden: false,
+                data:{
+                    id: 3005
+                },
+                link: '/pages/agent-operation/shop-home',
+            },
         ],
     },
     {

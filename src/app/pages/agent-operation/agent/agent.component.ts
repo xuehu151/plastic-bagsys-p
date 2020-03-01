@@ -23,7 +23,7 @@ export class AgentComponent implements OnInit {
     agentTelephone: string;
     agentCompanyName: string;
     managerPhone: string;
-    cityId: number;
+    cityId: number = 0;
     provinceId: number;
     currPage: number = 1;
     pageSize: number = 10;
@@ -165,7 +165,7 @@ export class AgentComponent implements OnInit {
             backdrop: 'static',
             keyboard: false
         });
-        activeModal.componentInstance.agentData = item;
+        activeModal.componentInstance.id = item.id;
         activeModal.result.then(result => {
             if ( result == 'success' ) {
                 this.searchAgentList();
