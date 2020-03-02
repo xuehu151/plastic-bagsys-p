@@ -33,6 +33,9 @@ export class EditUserModalComponent implements OnInit {
             // console.info(res);
             if ( res.code === 10000 ) {
                 this.roleList = res.data;
+                this.roleList = this.roleList.filter( item => {
+                    return item.id !== 2
+                })
             }
             else {
                 this.toastr.showToast('danger', '', res.message);

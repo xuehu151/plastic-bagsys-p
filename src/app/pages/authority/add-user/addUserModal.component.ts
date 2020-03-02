@@ -41,6 +41,9 @@ export class AddUserModalComponent implements OnInit {
             // console.info(res);
             if ( res.code === 10000 ) {
                 this.roleList = res.data;
+                this.roleList = this.roleList.filter( item => {
+                    return item.id !== 2
+                })
             }
             else {
                 this.toastr.showToast('danger', '', res.message);
@@ -56,11 +59,15 @@ export class AddUserModalComponent implements OnInit {
             roleId: this.roleId
         };
         if ( !this.username ) {
-            this.toastr.showToast('danger', '', '输入姓名');
+            this.toastr.showToast('danger', '', '输入姓名!');
             return false
         }
         else if ( !telReg.test(this.userTelephone) ) {
-            this.toastr.showToast('danger', '', '输入合法手机号');
+            this.toastr.showToast('danger', '', '输入合法手机号!');
+            return false
+        }
+        else if ( !this.roleId ) {
+            this.toastr.showToast('danger', '', '请选择角色!');
             return false
         }
         this.http.post(ServiceConfig.ADDUSER, params, ( res ) => {
