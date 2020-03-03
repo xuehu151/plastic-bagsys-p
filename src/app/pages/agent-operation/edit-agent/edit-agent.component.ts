@@ -44,6 +44,9 @@ export class EditAgentComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(){
         this.getAgentId();
+        setTimeout( () => {
+            this.getAgentId();
+        }, 1000)
     }
 
     getAgentId (): void {
@@ -54,6 +57,7 @@ export class EditAgentComponent implements OnInit, AfterViewInit {
                 this.areaArray = res.data.areaList;
                 this.provinceId = this.areaArray[ 0 ].provinceId;
                 this.provinceName = this.areaArray[ 0 ].provinceName;
+                this.areaInfo =  this.areaArray;
                 this.cityArray.filter( item => {
                     if(this.provinceId === item.parentId){
                         this.cityData.push(item);

@@ -72,12 +72,12 @@ export class OrderListHistoryComponent implements OnInit {
                 isShowInput: true
             },
             {
-                title: '发货日期',
+                title: '发货地址',
                 sortIcon: false,
                 isShowInput: true
             },
             {
-                title: '发货地址',
+                title: '备注',
                 sortIcon: false,
                 isShowInput: true
             },
@@ -102,7 +102,7 @@ export class OrderListHistoryComponent implements OnInit {
                 isShowInput: true
             },
             {
-                title: '备注',
+                title: '发货日期',
                 sortIcon: false,
                 isShowInput: true
             },

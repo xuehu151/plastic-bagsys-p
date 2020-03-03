@@ -60,6 +60,10 @@ export class EditUserModalComponent implements OnInit {
             this.toastr.showToast('danger', '', '输入合法手机号');
             return false
         }
+        else if ( !this.roleId ) {
+            this.toastr.showToast('danger', '', '请选择角色!');
+            return false
+        }
         this.http.put(ServiceConfig.EDITUSER, params, ( res ) => {
             if ( res.code === 10000 ) {
                 this.toastr.showToast('success', '', '修改成功!');
