@@ -37,6 +37,9 @@ export class BusinessStatusPipe implements PipeTransform {
             case 3:
                 businessStatus = '异常';
                 break;
+            case 4:
+                businessStatus = '出袋中';
+                break;
             default:
                 businessStatus = '未知';
         }
