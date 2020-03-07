@@ -31,6 +31,7 @@ export class OrderListHistoryComponent implements OnInit {
     startHandleTime: string;
     endHandleTime: string;
     finished: number = 2;
+    sn: string;
 
     constructor ( private areaDataService: AreaDataService,
                   private http: HttpCustormClient,
@@ -92,6 +93,11 @@ export class OrderListHistoryComponent implements OnInit {
                 isShowInput: true
             },
             {
+                title: '订单号',
+                sortIcon: false,
+                isShowInput: true
+            },
+            {
                 title: '运单号',
                 sortIcon: false,
                 isShowInput: true
@@ -116,6 +122,7 @@ export class OrderListHistoryComponent implements OnInit {
         this.startHandleTime = this.issuanceDate && this.issuanceDate['year'] + '-' + this.issuanceDate['month'] + '-' + this.issuanceDate['day'] + ' 00:00:00';
         //导出
         let params = {
+            sn: this.sn || '',
             consignee: this.consignee || '',
             goodsId: this.goodsId || '',
             signeeMobile: this.signeeMobile || '',
@@ -137,6 +144,7 @@ export class OrderListHistoryComponent implements OnInit {
             currPage: this.currPage,
             pageSize: this.pageSize,
             entity: {
+                sn: this.sn,
                 consignee: this.consignee,
                 goodsId: this.goodsId,
                 finished: this.finished,
