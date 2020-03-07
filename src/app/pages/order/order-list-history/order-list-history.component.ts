@@ -30,7 +30,7 @@ export class OrderListHistoryComponent implements OnInit {
     endCreateTime: string;
     startHandleTime: string;
     endHandleTime: string;
-    finished: number = 1;
+    finished: number = 2;
 
     constructor ( private areaDataService: AreaDataService,
                   private http: HttpCustormClient,

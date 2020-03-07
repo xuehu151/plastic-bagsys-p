@@ -130,9 +130,9 @@
                     <td>{{item.remark}}</td>
                     <td>{{item.price|| 0}}</td>
                     <td>{{item.status | orderStatus}}</td>
-                    <td>{{item.trackNum}}</td>
-                    <td>{{item.handleUserName}}</td>
-                    <td>{{item.editTime}}</td>
+                    <td>{{item.trackNum || '- - -'}}</td>
+                    <td>{{item.handleUserName || '- - -'}}</td>
+                    <td>{{item.handleTime || '- - -'}}</td>
                 </tr>
                 </tbody>
             </table>

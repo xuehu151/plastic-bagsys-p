@@ -29,7 +29,7 @@ export class OrderListComponent implements OnInit {
     totalPage: number = 0;
     startCreateTime: string;
     endCreateTime: string;
-    finished: number = 0;
+    finished: number = 1;
 
     constructor ( private areaDataService: AreaDataService,
                   private modalService: NgbModal,
