@@ -56,9 +56,9 @@
     td:last-child {
         border-bottom: 0;
     }
-    .operator{
+    .operator {
         width: 8rem;
-        span{
+        span {
             padding: 1px 8px;
             color: white;
             cursor: pointer;
@@ -67,14 +67,18 @@
             display: inline-block;
             border-radius: 2px;
         }
-        span:first-child{
+        span:first-child {
             background-color: #67c23a;
             border-color: #67c23a;
         }
-        span:last-child{
+        span:last-child {
             background-color: #f56c6c;
             border-color: #f56c6c;
             margin-left: 2px;
+        }
+        .disabled-span {
+            background-color: #7f7f7f!important;
+            border-color: #7f7f7f!important;
         }
     }
 }

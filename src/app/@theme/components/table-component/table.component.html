@@ -40,7 +40,9 @@
                 <td>{{item.roleName}}</td>
                 <td>{{item.createTime}}</td>
                 <td  class="operator" *ngIf="item.isOperation">
-                    <span (click)="startEdit(item)" *ngIf="item.editBtn">
+                    <span  (click)="item.disableBtn ? startEdit(item) : ''"
+                           *ngIf="item.editBtn"
+                           [ngClass]="{'disabled-span': !item.disableBtn}">
                         {{item.editButtonText}}
                     </span>
                     <span (click)="operate(item)" *ngIf="item.operateBtn">
