@@ -34,7 +34,7 @@ export class EditUserModalComponent implements OnInit {
             if ( res.code === 10000 ) {
                 this.roleList = res.data;
                 this.roleList = this.roleList.filter( item => {
-                    return item.id !== 2
+                    return item.id !== 2 && item.id !== 3
                 })
             }
             else {
