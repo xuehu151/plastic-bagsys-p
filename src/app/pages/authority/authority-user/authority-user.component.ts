@@ -104,7 +104,7 @@ export class AuthorityUserComponent implements OnInit {
                     item.isSelect = true;
                     item.editBtn = true;
                     item.disableBtn = true;
-                    if( item.type === '1' ){
+                    if( item.type !== '1' ){
                         item.disableBtn = false;
                     }
                     item.editButtonText = '修改';
