@@ -91,7 +91,7 @@
         <div class="table-panel">
             <table class="table">
                 <thead class="table-head">
-                <tr>
+                    <tr>
                     <th *ngFor="let list of tableTitle let i = index;"
                         [hidden]="!list.isShowInput"
                         [ngClass]="{inputClass: list.isSelect}">
@@ -115,21 +115,21 @@
                 </tr>
                 </thead>
                 <tbody class="table-body">
-                <tr *ngFor="let item of tableList; let i = index;"
+                    <tr *ngFor="let item of tableList; let i = index;"
                     [ngClass]="{inputClass: item.isSelect}">
                     <td>{{item.deviceId}}</td>
-                    <td>{{item.name}}</td>
-                    <td class="deviceCode">{{item.deviceCode}}</td>
-                    <td>{{item.agentName}}</td>
+                    <td class="td-width">{{item.name}}</td>
+                    <td>{{item.deviceCode}}</td>
+                    <td class="td-width">{{item.agentName}}</td>
                     <td>{{item.agentPhone}}</td>
                     <td>{{item.managerPhone}}</td>
-                    <td class="bag-city">{{item.provinceName}}{{item.cityName}}</td>
-                    <td class="address">{{item.address}}</td>
-                    <td>{{item.goodsPrice | floatNumberPipe}}</td>
-                    <td>{{item.profitPercent | floatNumberPipe}}</td>
-                    <td>{{item.todaySalesCount || 0}}</td>
-                    <td>{{item.totalGoodsSalesCount || 0}}</td>
-                    <td>{{item.runStatus | runStatus}}</td>
+                    <td>{{item.provinceName}}{{item.cityName}}</td>
+                    <td>{{item.address}}</td>
+                    <td class="td-width">{{item.goodsPrice | floatNumberPipe}}</td>
+                    <td class="td-width">{{item.profitPercent | floatNumberPipe}}</td>
+                    <td class="td-width">{{item.todaySalesCount || 0}}</td>
+                    <td class="td-width">{{item.totalGoodsSalesCount || 0}}</td>
+                    <td class="td-width">{{item.runStatus | runStatus}}</td>
                     <td class="operator" *ngIf="item.isOperation">
                         <span (click)="isUpperLowerShelf(item)" [style.background]="item.isEnable?'':'#fa0'">
                             {{item.isEnable? '下架':'上架'}}

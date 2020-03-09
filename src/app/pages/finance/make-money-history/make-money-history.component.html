@@ -58,18 +58,18 @@
                 <tbody class="table-body">
                 <tr *ngFor="let item of tableList; let i = index;"
                     [ngClass]="{inputClass: item.isSelect}">
-                    <td class="role-name">{{item.agentId}}</td>
-                    <td>{{item.bankAccount}}</td>
+                    <td>{{item.agentId}}</td>
+                    <td class="td-width">{{item.bankAccount}}</td>
                     <td>{{item.bankPhone}}</td>
                     <td>{{item.idCard}}</td>
                     <td>{{item.bankName}}</td>
                     <td>{{item.bankCard}}</td>
-                    <td>{{item.amount}}</td>
-                    <td class="role-name">{{item.createTime}}</td>
-                    <td>{{item.auditName}}</td>
+                    <td class="td-width">{{item.amount}}</td>
+                    <td>{{item.createTime}}</td>
+                    <td>{{item.auditName || '- - -'}}</td>
                     <td>{{item.editTime}}</td>
-                    <td>{{item.status===3?'拒绝':item.status===2?'已打款':''}}</td>
-                    <td>{{item.remarks}}</td>
+                    <td class="td-width">{{item.status===3?'拒绝':item.status===2?'已打款':''}}</td>
+                    <td>{{item.remarks || '- - -'}}</td>
                 </tr>
                 </tbody>
             </table>

@@ -117,7 +117,7 @@
                         <td class="role-name">{{item.address}}</td>
                         <td>{{item.price}}</td>
                         <td>{{item.status| purchaseStatus}}</td>
-                        <td>{{item.remark}}</td>
+                        <td>{{item.remark || '- - -'}}</td>
                         <td  class="operator" *ngIf="item.isOperation">
                             <span
                                 [ngClass]="{'courierNum':item.status === 1 }"

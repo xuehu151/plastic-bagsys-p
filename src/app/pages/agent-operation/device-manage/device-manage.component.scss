@@ -62,23 +62,12 @@
     }
 }
 
-.address{
-    width: 15rem;
-    word-break: break-word;
-}
-
-.deviceCode{
-    width: 20rem;
-    word-break: break-word;
-}
-
-.bag-city{
-    width: 10rem;
-    word-break: break-word;
+.td-width{
+    width: 5rem;
 }
 
 .operator{
-    width: 9rem!important;
+    //width: 9rem!important;
     display: flex;
     justify-content: flex-start;
     padding: .75rem 1px;

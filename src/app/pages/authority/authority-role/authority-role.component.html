@@ -36,7 +36,7 @@
                 <tbody class="table-body">
                     <tr *ngFor="let item of tableList; let i = index;"
                         [ngClass]="{inputClass: item.isSelect}">
-                        <td class="role-name">{{item.name}}</td>
+                        <td>{{item.name}}</td>
                         <td>{{item.roleName | roleNamePipe}}</td>
                         <td  class="operator" *ngIf="item.isOperation">
                             <span (click)="startEdit(item)">
