@@ -2,43 +2,20 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from "@angular/router";
 
 import {
-    NbActionsModule,
     NbCardModule,
     NbLayoutModule,
     NbMenuModule,
-    NbRouteTabsetModule,
-    NbSearchModule,
-    NbSidebarModule,
-    NbTabsetModule,
     NbThemeModule,
-    NbUserModule,
-    NbCheckboxModule,
     NbPopoverModule,
-    NbContextMenuModule,
-    NbProgressBarModule,
     NbCalendarModule,
-    NbCalendarRangeModule,
-    NbStepperModule,
-    NbButtonModule,
-    NbInputModule,
-    NbAccordionModule,
     NbDatepickerModule,
-    NbDialogModule,
-    NbWindowModule,
-    NbListModule,
     NbToastrModule,
-    NbAlertModule,
     NbSpinnerModule,
-    NbRadioModule,
-    NbSelectModule,
-    NbChatModule,
-    NbTooltipModule,
-    NbCalendarKitModule,
+    NbSidebarModule,
 } from '@nebular/theme';
-
-import { NbSecurityModule } from '@nebular/security';
 
 import {
     FooterComponent,
@@ -54,16 +31,7 @@ import {
     PurchaseStatusPipe,
     StandardPipe,
 } from './pipes';
-import {
-    OneColumnLayoutComponent,
-    SampleLayoutComponent,
-    ThreeColumnsLayoutComponent,
-    TwoColumnsLayoutComponent,
-} from './layouts';
-import { DEFAULT_THEME } from './styles/theme.default';
-import { COSMIC_THEME } from './styles/theme.cosmic';
-import { CORPORATE_THEME } from './styles/theme.corporate';
-import { RouterModule } from "@angular/router";
+import { SampleLayoutComponent } from './layouts';
 import { TableComponent } from "./components/table-component/table.component";
 import { PageComponent } from "./components/page/page.component";
 
@@ -77,37 +45,14 @@ const BASE_MODULES = [
 const NB_MODULES = [
     NbCardModule,
     NbLayoutModule,
-    NbTabsetModule,
-    NbRouteTabsetModule,
     NbMenuModule,
-    NbUserModule,
-    NbActionsModule,
-    NbSearchModule,
-    NbSidebarModule,
-    NbCheckboxModule,
     NbPopoverModule,
-    NbContextMenuModule,
     NgbModule,
-    NbSecurityModule, // *nbIsGranted directive,
-    NbProgressBarModule,
     NbCalendarModule,
-    NbCalendarRangeModule,
-    NbStepperModule,
-    NbButtonModule,
-    NbListModule,
     NbToastrModule,
-    NbInputModule,
-    NbAccordionModule,
     NbDatepickerModule,
-    NbDialogModule,
-    NbWindowModule,
-    NbAlertModule,
     NbSpinnerModule,
-    NbRadioModule,
-    NbSelectModule,
-    NbChatModule,
-    NbTooltipModule,
-    NbCalendarKitModule,
+    NbSidebarModule,
 ];
 
 const COMPONENTS = [
@@ -116,9 +61,6 @@ const COMPONENTS = [
     FooterComponent,
     TableComponent,
     PageComponent,
-    OneColumnLayoutComponent,
-    ThreeColumnsLayoutComponent,
-    TwoColumnsLayoutComponent,
 ];
 
 const ENTRY_COMPONENTS = [
@@ -140,17 +82,11 @@ const NB_THEME_PROVIDERS = [
         {
             name: 'cosmic',
         },
-        [DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME],
     ).providers,
     ...NbSidebarModule.forRoot().providers,
     ...NbMenuModule.forRoot().providers,
     ...NbDatepickerModule.forRoot().providers,
-    ...NbDialogModule.forRoot().providers,
-    ...NbWindowModule.forRoot().providers,
     ...NbToastrModule.forRoot().providers,
-    ...NbChatModule.forRoot({
-        messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
-    }).providers,
 ];
 
 @NgModule({

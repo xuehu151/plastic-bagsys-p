@@ -11,7 +11,7 @@
 @import './font-size';
 
 // loading progress bar theme
-@import './pace.theme';
+//@import './pace.theme';
 
 // install the framework and custom global styles
 @include nb-install() {
@@ -22,7 +22,7 @@
   @include nb-bootstrap-global();
 
   // loading progress bar
-  @include ngx-pace-theme();
+  //@include ngx-pace-theme();
 };
 
 .nb-theme-default nb-toast.success{

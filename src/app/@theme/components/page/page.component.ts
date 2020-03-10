@@ -30,7 +30,6 @@ export class PageComponent implements OnChanges {
     }
 
     goPrevious ( pageNum ) {
-        console.log(pageNum);
         if ( pageNum >= 1 && pageNum !== this.page ) {
             this.pageChange(pageNum);
         }

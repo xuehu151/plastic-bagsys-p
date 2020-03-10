@@ -125,7 +125,7 @@ export class AddRoleComponent implements OnInit {
 
     getMenuTree (): void {
         this.http.post(ServiceConfig.MENUTREE, {}, ( res ) => {
-            console.info(res)
+            // console.info(res)
             this.roleArray = res.data;
             this.roleArray.filter(( item ) => {
                 item.isShow = false;
@@ -183,7 +183,6 @@ export class AddRoleComponent implements OnInit {
                 }
             })
         });
-        console.info(this.funcIdArr);
         let params = {
             id: this.roleId,
             name: this.roleName,

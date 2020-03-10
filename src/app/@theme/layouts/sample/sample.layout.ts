@@ -1,27 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { delay, withLatestFrom, takeWhile } from 'rxjs/operators';
-import {
-    NbMediaBreakpoint,
-    NbMediaBreakpointsService,
-    NbMenuItem,
-    NbMenuService,
-    NbSidebarService,
-    NbThemeService,
-} from '@nebular/theme';
+import { NbThemeService } from '@nebular/theme';
 
 @Component({
     selector: 'ngx-sample-layout',
     styleUrls: ['./sample.layout.scss'],
     template: `
-        <nb-layout [center]="layout.id === 'center-column'" windowMode>
+        <nb-layout windowMode>
             <nb-layout-header fixed>
-                <ngx-header [position]="sidebar.id === 'start' ? 'normal': 'inverse'"></ngx-header>
+                <ngx-header></ngx-header>
             </nb-layout-header>
 
             <nb-sidebar class="menu-sidebar"
                         tag="menu-sidebar"
-                        responsive
-                        [end]="sidebar.id === 'end'">
+                        responsive>
                 <ng-content select="nb-menu"></ng-content>
             </nb-sidebar>
 
@@ -53,44 +44,16 @@ import {
 })
 
 export class SampleLayoutComponent implements OnDestroy, OnInit {
-
     layout: any = {};
     sidebar: any = {};
-    private alive = true;
-    currentTheme: string;
 
-    constructor ( private themeService: NbThemeService,
-                  protected menuService: NbMenuService,
-                  protected bpService: NbMediaBreakpointsService,
-                  protected sidebarService: NbSidebarService ) {
+    constructor ( private themeService: NbThemeService,) {
         this.themeService.changeTheme('default');
-
-
-        const isBp = this.bpService.getByName('is');
-        this.menuService.onItemSelect()
-            .pipe(
-                takeWhile(() => this.alive),
-                withLatestFrom(this.themeService.onMediaQueryChange()),
-                delay(20),
-            )
-            .subscribe(( [item, [bpFrom, bpTo]]: [any, [NbMediaBreakpoint, NbMediaBreakpoint]] ) => {
-
-                if ( bpTo.width <= isBp.width ) {
-                    this.sidebarService.collapse('menu-sidebar');
-                }
-            });
-
-        this.themeService.getJsTheme()
-            .pipe(takeWhile(() => this.alive))
-            .subscribe(theme => {
-                this.currentTheme = theme.name;
-            });
     }
 
     ngOnInit(): void{
     }
 
     ngOnDestroy () {
-        this.alive = false;
     }
 }
