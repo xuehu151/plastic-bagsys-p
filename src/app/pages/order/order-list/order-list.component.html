@@ -112,11 +112,11 @@
                         <td class="role-name">{{item.consignee}}</td>
                         <td>{{item.signeeMobile}}</td>
                         <td>{{item.goodsName}}</td>
-                        <td>{{item.count}}</td>
+                        <td class="role-name">{{item.count}}</td>
                         <td>{{item.createTime}}</td>
-                        <td class="role-name">{{item.address}}</td>
-                        <td>{{item.price}}</td>
-                        <td>{{item.status| purchaseStatus}}</td>
+                        <td>{{item.address}}</td>
+                        <td class="role-name">{{item.price}}</td>
+                        <td class="role-name">{{item.status| purchaseStatus}}</td>
                         <td>{{item.remark || '- - -'}}</td>
                         <td  class="operator" *ngIf="item.isOperation">
                             <span
