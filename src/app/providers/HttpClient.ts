@@ -30,9 +30,9 @@ export class HttpCustormClient {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         };
         this.http.get(URL, { headers: httpOptions.headers.append('X-Auth-Token', TOKEN) })
-            .subscribe(data => {
-                // console.log('get请求结束', data);
-                cb(data);
+            .subscribe(res => {
+                // console.log('get请求结束', res);
+                this.tokenExpired(res, cb);
             }, error => {
                 this.handleSubscribeError(error);
             });
@@ -55,7 +55,7 @@ export class HttpCustormClient {
                 responseType: 'blob'
             })
             .subscribe(res => {
-                cb(res)
+                this.tokenExpired(res, cb);
             }, ( error: any ) => {
                 this.handleSubscribeError(error);
             });
@@ -101,7 +101,7 @@ export class HttpCustormClient {
         this.http.post(URL, data, options)
             .subscribe(res => {
                 // console.log('post请求结束', res);
-                cb(res);
+                this.tokenExpired(res, cb);
             }, error => {
                 this.handleSubscribeError(error);
             });
@@ -118,7 +118,7 @@ export class HttpCustormClient {
         this.http.put(URL, data, { headers: headers.headers.append('X-Auth-Token', TOKEN) })
             .subscribe(( res: any ) => {
                 // console.log('put:end', res);
-                cb(res);
+                this.tokenExpired(res, cb);
             }, error => {
                 this.handleSubscribeError(error);
             });
@@ -134,7 +134,7 @@ export class HttpCustormClient {
         this.http.delete(URL, { headers: headers.headers.append('X-Auth-Token', TOKEN) })
             .subscribe(( res: any ) => {
                 // console.log('put:end', res);
-                cb(res);
+                this.tokenExpired(res, cb);
             }, error => {
                 this.handleSubscribeError(error);
             });
@@ -166,6 +166,18 @@ export class HttpCustormClient {
         }, error => {
             this.handleSubscribeError(error);
         });
+    }
+
+    private tokenExpired(res, cb:Function){//优化token过期逻辑
+        if(res['code'] === 10000){
+            cb(res);
+        }else {
+            this.toastr.showToast('danger', '',res['message']);
+            localStorage.clear();
+            setTimeout( () => {
+                this.router.navigate(['/customAuth/login']);
+            }, 1000 * 2);
+        }
     }
 
     private handleSubscribeError ( error: any ) {
