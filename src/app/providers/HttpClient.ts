@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Router } from '@angular/router';
 import { ServiceConfig } from './service.config';
 import { Toastrervice } from "../providers/toastrService";
-
+import { ToastrService } from "ngx-toastr";
 
 @Injectable()
 export class HttpCustormClient {
 
     constructor ( public http: HttpClient,
                   private toastr: Toastrervice,
+                  private toast: ToastrService,
                   private router: Router ) {
     }
 
@@ -172,7 +173,10 @@ export class HttpCustormClient {
         if(res['code'] === 10000){
             cb(res);
         }else {
-            this.toastr.showToast('danger', '',res['message']);
+            this.toast.error(res['message'], '', {
+                positionClass: "toast-top-center",
+                timeOut: 5000
+            });
             localStorage.clear();
             setTimeout( () => {
                 this.router.navigate(['/customAuth/login']);
@@ -186,7 +190,10 @@ export class HttpCustormClient {
             localStorage.clear();
             this.router.navigate(['/customAuth/login']);
         }
-        this.toastr.showToast('danger', '','网络请求出错，请检查网络重试!');
+        this.toast.error('网络请求出错，请检查网络重试!', '', {
+            positionClass: "toast-top-center",
+            timeOut: 3000
+        });
         // console.info('origin error: ', error);
     }
 }

@@ -14,6 +14,7 @@ import { ConfigService } from "./providers/configService";
 import { Toastrervice } from "./providers/toastrService";
 import { AreaDataService, TrimService } from "./providers/areaDataService";
 import { FloatNumberService } from './providers/floatNumberService';
+import { ToastrModule } from "ngx-toastr";
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { FloatNumberService } from './providers/floatNumberService';
 
         NgbModule.forRoot(),
         ThemeModule.forRoot(),
+        ToastrModule.forRoot(),
     ],
     exports: [
     ],
